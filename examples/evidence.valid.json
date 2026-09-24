@@ -1,0 +1,18 @@
+{
+  "evidence_id": "E-EXAMPLE-001",
+  "subject": {"candidate_name": "示例仲裁员", "candidate_id": null, "institution": "示例机构", "identity_notes": "身份已由本示例来源确认"},
+  "evidence_type": "source_supported_fact",
+  "claim": "示例机构公开页面列出该候选人为仲裁员。",
+  "source": {"title": "示例机构仲裁员名册", "publisher": "示例机构", "url": "https://example.invalid/roster", "local_path": null, "source_type": "official_roster", "published_date": null, "event_date": null},
+  "retrieval": {"retrieved_at": "2026-09-24T12:00:00+08:00", "retrieval_notes": "示例，不代表真实检索"},
+  "excerpt": "示例机构仲裁员名册：示例仲裁员。",
+  "excerpt_locator": "网页正文，候选人条目",
+  "context": "仅支持公开名册身份事实。",
+  "identity_resolution": "resolved",
+  "quality": {"source_quality": "A", "provenance_status": "primary", "quality_notes": null},
+  "supports": {"relevance": "direct", "supports_statement": "支持候选人属于该机构公开名册的事实。"},
+  "limitations": ["示例来源不证明当前状态以外的履历。"],
+  "uncertainty": "limited",
+  "snapshot": {"level": "L1", "status": "not_saved", "path": null, "sha256": null, "media_type": "text/plain", "notes": "保留最小摘录"},
+  "human_review": "not_started"
+}

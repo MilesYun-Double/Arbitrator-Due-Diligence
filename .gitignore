@@ -1,0 +1,23 @@
+# Project-local ignores
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.tmp/
+.tmp-*/
+
+# Research outputs and snapshots are local by default.
+reports/
+**/snapshots/
+**/evidence-snapshots/
+*.snapshot.html
+*.snapshot.md
+*.snapshot.pdf
+
+# Local secrets and runtime files
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
