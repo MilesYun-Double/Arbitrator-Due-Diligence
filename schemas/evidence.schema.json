@@ -4,23 +4,380 @@
   "title": "ADD Evidence Object",
   "type": "object",
   "additionalProperties": false,
-  "required": ["evidence_id","subject","evidence_type","claim","source","retrieval","identity_resolution","quality","supports","limitations","uncertainty","snapshot","human_review"],
+  "required": [
+    "evidence_id",
+    "subject",
+    "evidence_type",
+    "claim",
+    "source",
+    "retrieval",
+    "identity_resolution",
+    "quality",
+    "supports",
+    "limitations",
+    "uncertainty",
+    "snapshot",
+    "human_review"
+  ],
   "properties": {
-    "evidence_id":{"type":"string","pattern":"^E-[A-Za-z0-9][A-Za-z0-9._-]*$"},
-    "subject":{"type":"object","additionalProperties":false,"required":["candidate_name"],"properties":{"candidate_name":{"type":"string","minLength":1},"candidate_id":{"type":["string","null"]},"institution":{"type":["string","null"]},"identity_notes":{"type":["string","null"]}}},
-    "evidence_type":{"type":"string","enum":["source_supported_fact","public_viewpoint","relationship_fact","derived_interpretation","unresolved_lead","unknown_insufficient_coverage"]},
-    "claim":{"type":"string","minLength":1},
-    "source":{"type":"object","additionalProperties":false,"required":["title","publisher","source_type"],"properties":{"title":{"type":"string","minLength":1},"publisher":{"type":"string","minLength":1},"url":{"type":["string","null"],"format":"uri"},"local_path":{"type":["string","null"]},"source_type":{"type":"string","enum":["official_roster","official_profile","official_rule","government_or_court","original_publication","publisher_page","conference_or_event","institutional_profile","formal_media","secondary_or_aggregator","search_snippet","user_provided_file","other"]},"published_date":{"type":["string","null"],"format":"date"},"event_date":{"type":["string","null"],"format":"date"}}},
-    "retrieval":{"type":"object","additionalProperties":false,"required":["retrieved_at"],"properties":{"retrieved_at":{"type":"string","format":"date-time"},"retrieval_notes":{"type":["string","null"]}}},
-    "excerpt":{"type":["string","null"]},
-    "excerpt_locator":{"type":["string","null"]},
-    "context":{"type":["string","null"]},
-    "identity_resolution":{"type":"string","enum":["resolved","partially_resolved","unresolved_same_name","not_applicable"]},
-    "quality":{"type":"object","additionalProperties":false,"required":["source_quality","provenance_status"],"properties":{"source_quality":{"type":"string","enum":["A","B","C","unknown"]},"provenance_status":{"type":"string","enum":["primary","secondary","snippet_only","user_supplied","unknown"]},"quality_notes":{"type":["string","null"]}}},
-    "supports":{"type":"object","additionalProperties":false,"required":["relevance","supports_statement"],"properties":{"relevance":{"type":"string","enum":["direct","contextual","lead_only","none","unknown"]},"supports_statement":{"type":"string","minLength":1}}},
-    "limitations":{"type":"array","items":{"type":"string"}},
-    "uncertainty":{"type":"string","enum":["none_stated","limited","material","unknown"]},
-    "snapshot":{"type":"object","additionalProperties":false,"required":["level","status"],"properties":{"level":{"type":"string","enum":["L0","L1","L2","L3","L4"]},"status":{"type":"string","enum":["not_saved","saved","unavailable","user_provided"]},"path":{"type":["string","null"]},"sha256":{"type":["string","null"],"pattern":"^(?:[A-Fa-f0-9]{64})?$"},"media_type":{"type":["string","null"]},"notes":{"type":["string","null"]}}},
-    "human_review":{"type":"string","enum":["not_started","in_review","reviewed","reviewed_with_reservation"]}
-  }
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^E-[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_name"
+      ],
+      "properties": {
+        "candidate_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "institution": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identity_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "source_supported_fact",
+        "public_viewpoint",
+        "relationship_fact",
+        "derived_interpretation",
+        "unresolved_lead",
+        "unknown_insufficient_coverage"
+      ]
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "publisher",
+        "source_type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "local_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "official_roster",
+            "official_profile",
+            "official_rule",
+            "government_or_court",
+            "original_publication",
+            "publisher_page",
+            "conference_or_event",
+            "institutional_profile",
+            "formal_media",
+            "secondary_or_aggregator",
+            "search_snippet",
+            "user_provided_file",
+            "other"
+          ]
+        },
+        "published_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "event_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "url"
+          ]
+        },
+        {
+          "required": [
+            "local_path"
+          ]
+        }
+      ]
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retrieved_at"
+      ],
+      "properties": {
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "retrieval_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "excerpt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "excerpt_locator": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "context": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "identity_resolution": {
+      "type": "string",
+      "enum": [
+        "resolved",
+        "partially_resolved",
+        "unresolved_same_name",
+        "not_applicable"
+      ]
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_quality",
+        "provenance_status"
+      ],
+      "properties": {
+        "source_quality": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "unknown"
+          ]
+        },
+        "provenance_status": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "secondary",
+            "snippet_only",
+            "user_supplied",
+            "unknown"
+          ]
+        },
+        "quality_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "supports": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relevance",
+        "supports_statement"
+      ],
+      "properties": {
+        "relevance": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "contextual",
+            "lead_only",
+            "none",
+            "unknown"
+          ]
+        },
+        "supports_statement": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "uncertainty": {
+      "type": "string",
+      "enum": [
+        "none_stated",
+        "limited",
+        "material",
+        "unknown"
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "status"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_saved",
+            "saved",
+            "unavailable",
+            "user_provided"
+          ]
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "media_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "human_review": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_review",
+        "reviewed",
+        "reviewed_with_reservation"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "excerpt"
+        ],
+        "properties": {
+          "excerpt": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "excerpt_locator"
+        ],
+        "properties": {
+          "excerpt_locator": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidence_type": {
+            "enum": [
+              "source_supported_fact",
+              "public_viewpoint",
+              "relationship_fact"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "excerpt"
+        ],
+        "properties": {
+          "excerpt": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
 }

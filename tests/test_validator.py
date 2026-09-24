@@ -28,4 +28,12 @@ class EvidenceValidatorTests(unittest.TestCase):
         x=json.loads(json.dumps(BASE)); x["human_review"]="not_started"; self.assertEqual(validate_evidence(x), [])
     def test_not_found_is_unknown(self):
         x=json.loads(json.dumps(BASE)); x["evidence_type"]="unknown_insufficient_coverage"; x["claim"]="本次检索未发现符合条件的公开来源。"; x["excerpt"]=None; x["excerpt_locator"]=None; x["supports"]={"relevance":"unknown","supports_statement":"仅表示本次覆盖范围内未发现，不表示不存在。"}; x["uncertainty"]="material"; self.assertEqual(validate_evidence(x), [])
+    def test_page_unavailable_preserves_url_and_gap(self):
+        x=json.loads(json.dumps(BASE))
+        x["source"]["url"]="https://example.invalid/expired"
+        x["snapshot"]={"level":"L1","status":"unavailable","path":None,"sha256":None,"media_type":"text/html","notes":"页面当前不可访问，未保存快照。"}
+        x["retrieval"]["retrieval_notes"]="访问时页面返回不可用状态。"
+        x["limitations"]=["页面失效；仅保留已取得摘录和 URL。"]
+        self.assertEqual(validate_evidence(x), [])
+        self.assertIsNone(x["snapshot"]["path"])
 if __name__=='__main__': unittest.main()
