@@ -137,12 +137,24 @@
         {
           "required": [
             "url"
-          ]
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
         },
         {
           "required": [
             "local_path"
-          ]
+          ],
+          "properties": {
+            "local_path": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
         }
       ]
     },

@@ -36,4 +36,28 @@ class EvidenceValidatorTests(unittest.TestCase):
         x["limitations"]=["页面失效；仅保留已取得摘录和 URL。"]
         self.assertEqual(validate_evidence(x), [])
         self.assertIsNone(x["snapshot"]["path"])
+    def test_source_traceability_contract(self):
+        schema=json.loads((Path(__file__).parents[1]/"schemas/evidence.schema.json").read_text(encoding="utf-8"))
+        branches=schema["properties"]["source"]["anyOf"]
+        # Guard the standard Schema clauses without introducing a Schema engine.
+        self.assertEqual(branches, [
+            {"required":["url"], "properties":{"url":{"type":"string","minLength":1}}},
+            {"required":["local_path"], "properties":{"local_path":{"type":"string","minLength":1}}},
+        ])
+        cases=[
+            ({}, False),
+            ({"url":None,"local_path":None}, False),
+            ({"url":"","local_path":""}, False),
+            ({"url":"https://example.invalid/source"}, True),
+            ({"local_path":"sources/synthetic.txt"}, True),
+            ({"url":None,"local_path":"sources/synthetic.txt"}, True),
+            ({"url":"https://example.invalid/source","local_path":None}, True),
+        ]
+        for trace, expected in cases:
+            with self.subTest(trace=trace):
+                x=json.loads(json.dumps(BASE))
+                x["source"].pop("url",None)
+                x["source"].pop("local_path",None)
+                x["source"].update(trace)
+                self.assertEqual(not validate_evidence(x), expected)
 if __name__=='__main__': unittest.main()
