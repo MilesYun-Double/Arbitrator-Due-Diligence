@@ -3,7 +3,7 @@
 > 更新日期：2026-09-25
 > 正式名称：Arbitrator Due Diligence
 > 当前阶段：V1 最小能力实现
-> 当前获准子阶段：Bundled Capability Baseline
+> 当前获准子阶段：第一名真实完整链路
 
 本项目面向中国大陆商事仲裁案件中的律师、企业法务和争议解决团队，围绕指定仲裁机构及有限候选范围，整理仲裁员身份、专业背景、公开著作与观点、公开专业关系事实、冲突线索、来源限制和人工复核事项。
 
@@ -14,14 +14,65 @@
 - 首轮机构：贸仲（CIETAC）。
 - V0.2 Evidence Foundation：PASS（已通过独立复审）。
 - Capability Requirements / Source Evaluation：PASS。
-- Static Source → Snapshot → Evidence：PASS（Issue #6 已主控验收关闭）。
-- Digital PDF → Snapshot → Evidence：PASS（Issue #7 已主控验收关闭）。
-- Canonical Report Model → Markdown / HTML：PASS（Issue #10 累计独立审查及主控 Gate 已通过）。
-- 当前阶段：V1 最小能力实现；当前获准子阶段：Bundled Capability Baseline。
-- 当前主要产物：Evidence Schema、Snapshot Policy、Validator、静态来源/PDF提取脚本、Canonical Report Model、Markdown/HTML/PDF Renderer 候选、测试与合成示例、实测耗时记录。
+- Static Source → Snapshot → Evidence：PASS。
+- Digital PDF → Snapshot → Evidence：PASS。
+- Canonical Report Model → Markdown / HTML：PASS。
+- Canonical Report Model → PDF：PASS。
+- Bundled Capability Baseline：PASS（Issue #13 主控 Gate；Issue #14 独立审查 PASS）。
+- CIETAC 5 人样本抽样与锁样：PASS（Issue #15 主控 Gate；Issue #16 独立审查 PASS）。
+- 当前阶段：V1 最小能力实现；当前获准子阶段：**第一名完整真实链路**。
+- 当前主要能力：Evidence Schema、Snapshot Policy、Validator、静态来源/PDF提取、Canonical Report Model、Markdown/HTML/PDF Renderer、Bundled capability smoke、端到端合成链。
 - 当前工作区：`D:\Arbitrator Due Diligence`。
-- 真实人物试用报告保留在本地 `reports/`，不纳入公开仓库。
+- 真实人物研究报告和证据继续保留在本地 `reports/`，不纳入公开仓库。
 - 当前没有数据库、后台服务、UI、外部 API 或多 Agent 调度平台。
+
+## 当前锁定样本
+
+候选池依据：CIETAC 官网当前“仲裁员名册”正式入口所提供的固定 PDF。
+
+- PDF SHA-256：`978da4776f3263488260a0fa72ab0db8195ab265d7ab93c0509be19603067fe8`
+- Candidate pool：2301 条人物记录
+- Public pool JSONL SHA-256：`73fe6b0f2c30703a8327e95797d2845bb95c6bc92bb5d2c4f2f23d041666c4e1`
+
+锁定样本按抽样 hash 升序为：
+
+1. `WONG, King/黄劲`（pool_index 1683）
+2. `邹明春/Zou Mingchun`（pool_index 1605）
+3. `BOGASON, Þórður`（pool_index 1804）
+4. `周广俊/Zhou Guangjun`（pool_index 1558）
+5. `GRAFSTEIN, Joan`（pool_index 1928）
+
+该顺序仅为确定性抽样顺序，不代表推荐、能力、适合度或优先级。锁样后不因资料少、难检索、同名、国籍、职业或知名度换人。
+
+官方人数 `2308 / 2301 / 2300` 的差异继续作为 known consistency note 保留，不对差异原因作未经证实的推断。
+
+## 当前下一步
+
+只对锁样顺序第 1 名：
+
+`WONG, King/黄劲`
+
+执行一次**完整真实基础尽调链路**：
+
+```text
+真实公开检索
+→ 身份消歧
+→ Source / Snapshot
+→ Evidence Objects
+→ evidence.json
+→ Validator
+→ Canonical Report Model
+→ Markdown / HTML / PDF
+→ readback / consistency check
+```
+
+本轮没有用户指定观点或法律问题，因此：
+
+- 指定观点检索：**未启用**；
+- 案件相关冲突线索核查：**未启用**；
+- 不得把“未执行”写成“没有观点问题”或“无冲突”。
+
+第一名完整真实链路完成后先停止并 Gate，不自动继续第 2–5 名。
 
 ## 产品边界
 
@@ -39,17 +90,18 @@
 - 不自动决定人选、认定回避或提出回避申请；
 - 不采集私人通信、私人社交关系、泄露数据、非公开仲裁材料或未经核实传闻。
 
-## 当前阶段之后的已确认路线
+## 当前路线
 
 ```text
-V1 最小能力实现（Issue #9 PDF 已独立复审及主控 Gate PASS）
-→ Bundled Capability Baseline（当前仅获准完整合成链与依赖闭包验证）
-→ 从实际 CIETAC 官方候选范围按预先固定规则随机抽取 5 名普通仲裁员
-→ 锁定样本
-→ 第一名完整真实链路
+V1 最小能力实现
+→ Bundled Capability Baseline：PASS
+→ CIETAC 5 人确定性抽样与锁样：PASS
+→ 第一名完整真实链路：CURRENT
+→ 主控验收 / 独立审查
+→ 再决定是否继续第 2–5 名或修复暴露问题
 ```
 
-该路线只记录已确认阶段，不在本简报中设计 Capability 实现或新增第三方项目。
+不在第一名真实链路之前继续增加 PDF/Pillow、OCR、跨平台、UI、数据库或其他非阻塞技术准备。
 
 ## Evidence 基础
 
@@ -61,6 +113,10 @@ Research → Evidence Objects → evidence.json → Validator → Canonical Repo
 
 Evidence 字段和 Snapshot 规则分别以 `schemas/evidence.schema.json` 和 `references/snapshot-policy.md` 为准。Snapshot 记录检索时看到了什么，不提高原始来源权威性。
 
+“未检索到”不等于“不存在”；无法访问、只有摘要、来源受限或同名无法排除时，必须保留 coverage gap / unknown。
+
 ## 治理
 
-用户是最终决策人；主对话是项目主控；主开发负责获准范围内的实现和证据；独立 Codex 对话负责独立审查。本轮完成后等待主控验收，不由主开发自行进入下一阶段。
+用户是最终决策人；主对话是项目主控；主开发负责获准范围内的实现和证据；独立 Codex 对话负责独立审查。
+
+主开发不得自行进入下一阶段。第一名真实链路执行完成后先回主控；如出现产品或代码阻塞，不得借机自行修改架构、依赖或扩大范围。
