@@ -1,0 +1,4 @@
+# Preserve PDF xref offsets and the original third-party wheel across checkouts.
+tests/fixtures/pdf_sources/*.pdf binary
+vendor/*.whl binary
+vendor/pypdf-LICENSE.txt -text

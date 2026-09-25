@@ -40,6 +40,10 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 
 基础产品应遵循 Bundled First、Host Enhanced：用户不应被强制购买服务、申请付费 API 或另行安装第三方项目。Skill ZIP 可携带合法可再分发的脚本、Schema、模板和静态资源；宿主已有联网能力可用于搜索。实际打包第三方组件时必须单独核验许可证、NOTICE 和再分发义务。
 
+## User waiting experience and timing
+
+技术上能完成不等于产品可接受。Capability、第三方来源和架构选型必须同时考虑用户等待时间；后续每项关键 Capability 都应保留可复现的实测耗时，并关注冷启动、单来源处理、网络等待/重试以及串并行结构对总耗时的影响。单名仲裁员完整尽调若需要约 30 分钟，属于明显不理想的体验，不应作为正常目标状态接受。在第一条真实完整链路取得数据前，不预设精确 SLA；先测量，再由主控固定性能预算。
+
 ## Current scope and success standard
 
 V0.2 仅包含 Evidence Foundation。Capability 选型、随机仲裁员研究和完整 Report Renderer 属于后续阶段。当前成功标准是把公开研究结果形成可靠、结构化、可追溯、可验证并能进入统一报告链的证据基础。
