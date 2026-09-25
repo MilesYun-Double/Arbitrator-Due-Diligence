@@ -17,3 +17,8 @@ examples/pdf-report-preview/*.md text eol=lf
 examples/pdf-report-preview/*.html text eol=lf
 
 vendor/pdf/*.zip binary
+
+# Preserve Issue #13 measured synthetic artifacts verbatim.
+examples/bundled-baseline/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+examples/bundled-baseline/**/*.pdf binary
+examples/bundled-baseline/*.pdf binary

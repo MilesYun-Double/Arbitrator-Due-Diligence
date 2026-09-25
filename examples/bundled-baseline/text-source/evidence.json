@@ -1,0 +1,48 @@
+{
+  "evidence_id": "E-CHAIN-TEXT",
+  "subject": {
+    "candidate_name": "流程测试来源（非人物）",
+    "identity_notes": "不执行人物身份核验"
+  },
+  "evidence_type": "unresolved_lead",
+  "claim": "仅验证合成材料中的摘录，不作人物或法律判断。",
+  "source": {
+    "title": "合成来源（非人物）",
+    "publisher": "ADD synthetic fixture",
+    "url": null,
+    "local_path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\inputs\\source.txt",
+    "source_type": "user_provided_file",
+    "published_date": null,
+    "event_date": null
+  },
+  "retrieval": {
+    "retrieved_at": "2026-09-25T12:32:17.047712+00:00",
+    "retrieval_notes": "{\"requested_url\": null, \"final_url\": null, \"source_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\inputs\\\\source.txt\", \"content_type\": \"text/plain\", \"http_status\": null, \"source_sha256\": \"76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727\", \"readable_sha256\": \"76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727\"}"
+  },
+  "excerpt": "该材料仅用于流程测试。",
+  "excerpt_locator": "readable UTF-8 text sha256=76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727; characters [14, 25) (zero-based Unicode)",
+  "context": "调用者提供的陈述；脚本仅验证摘录存在，不判断其真伪或支持关系。",
+  "identity_resolution": "not_applicable",
+  "quality": {
+    "source_quality": "unknown",
+    "provenance_status": "unknown",
+    "quality_notes": "保存快照不提升来源等级；发布主体由调用者提供，未核验。"
+  },
+  "supports": {
+    "relevance": "unknown",
+    "supports_statement": "支持关系待人工复核。"
+  },
+  "limitations": [
+    "仅静态读取，不执行脚本；不核验来源真实性、身份或法律结论。"
+  ],
+  "uncertainty": "unknown",
+  "snapshot": {
+    "level": "L2",
+    "status": "saved",
+    "path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\text-source\\source.raw",
+    "sha256": "76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727",
+    "media_type": "text/plain",
+    "notes": "{\"readable_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\text-source\\\\readable.txt\", \"readable_sha256\": \"76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727\"}"
+  },
+  "human_review": "not_started"
+}

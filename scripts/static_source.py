@@ -55,6 +55,24 @@ def scoped_path(value, root):
     return path
 
 
+RUN_MARKER = 'synthetic-run.json'
+RUN_CONTRACT = {'scope': 'ADD synthetic capability run', 'version': 1}
+
+
+def task_run_root(value, *, create=False):
+    """Explicit project-child synthetic run only; marker is scope, not authority."""
+    root = scoped_path(value, PROJECT)
+    if root.parent != PROJECT or not root.name.startswith('.tmp-add-run-'):
+        raise ValueError('run root must be a project-child .tmp-add-run-* directory')
+    marker = scoped_path(root / RUN_MARKER, root)
+    if create:
+        root.mkdir(exist_ok=False)
+        marker.write_text(json.dumps(RUN_CONTRACT), encoding='utf-8')
+    elif not root.is_dir() or json.loads(marker.read_text(encoding='utf-8')) != RUN_CONTRACT:
+        raise ValueError('missing or invalid synthetic run contract')
+    return root
+
+
 def _url_parts(url):
     parts = urlsplit(url)
     if (parts.scheme not in ('http', 'https') or not parts.hostname or parts.username
@@ -169,20 +187,23 @@ def readable(raw, content_type):
 
 
 def collect(source, output, *, evidence_id, title, publisher, claim, excerpt=None,
-            evidence_type='unresolved_lead', level='L2'):
+            evidence_type='unresolved_lead', level='L2', run_root=None):
     if evidence_type not in TYPES or level not in ('L0', 'L1', 'L2'):
         raise ValueError('unsupported evidence type or snapshot level')
     if evidence_type == 'source_supported_fact' and (not excerpt or level == 'L0'):
         raise ValueError('source-supported fact requires an excerpt and L1/L2')
     if not all(isinstance(v, str) and v.strip() for v in (title, publisher, claim)):
         raise ValueError('title, publisher and claim are caller-supplied nonempty metadata')
-    output = scoped_path(output, PROJECT)
+    allowed = task_run_root(run_root) if run_root is not None else None
+    output = scoped_path(output, allowed or PROJECT)
     if output.exists():
         raise FileExistsError('output must be a new directory')
     is_url = '://' in source
+    if allowed is not None and is_url:
+        raise ValueError('task-owned synthetic run accepts local inputs only')
     local = None
     if not is_url:
-        local = scoped_path(source, TEST_ROOT)
+        local = scoped_path(source, allowed or TEST_ROOT)
         if local.suffix.lower() not in ('.txt', '.html', '.htm'):
             raise ValueError('only explicitly named test text/HTML files are allowed')
     else:
@@ -274,6 +295,7 @@ def main():
     parser.add_argument('--output', required=True)
     for key in ('evidence-id', 'title', 'publisher', 'claim'):
         parser.add_argument('--' + key, required=True)
+    parser.add_argument('--run-root')
     parser.add_argument('--excerpt')
     parser.add_argument('--evidence-type', choices=TYPES, default='unresolved_lead')
     parser.add_argument('--level', choices=('L0', 'L1', 'L2'), default='L2')

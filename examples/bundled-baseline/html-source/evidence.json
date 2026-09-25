@@ -1,0 +1,48 @@
+{
+  "evidence_id": "E-CHAIN-HTML",
+  "subject": {
+    "candidate_name": "流程测试来源（非人物）",
+    "identity_notes": "不执行人物身份核验"
+  },
+  "evidence_type": "source_supported_fact",
+  "claim": "仅验证合成材料中的摘录，不作人物或法律判断。",
+  "source": {
+    "title": "合成来源（非人物）",
+    "publisher": "ADD synthetic fixture",
+    "url": null,
+    "local_path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\inputs\\page.html",
+    "source_type": "user_provided_file",
+    "published_date": null,
+    "event_date": null
+  },
+  "retrieval": {
+    "retrieved_at": "2026-09-25T12:32:17.033536+00:00",
+    "retrieval_notes": "{\"requested_url\": null, \"final_url\": null, \"source_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\inputs\\\\page.html\", \"content_type\": \"text/html\", \"http_status\": null, \"source_sha256\": \"f84ca1e509258dbe15b403db8d4fe2aea71ed08478339f3ff5cedfe53b8b12f9\", \"readable_sha256\": \"4129aa46b694051d9ee29825f5a0295667e626e36c9ee45145e171ca3bf3669a\"}"
+  },
+  "excerpt": "合成机构成立于2020年。",
+  "excerpt_locator": "readable UTF-8 text sha256=4129aa46b694051d9ee29825f5a0295667e626e36c9ee45145e171ca3bf3669a; characters [5, 18) (zero-based Unicode)",
+  "context": "调用者提供的陈述；脚本仅验证摘录存在，不判断其真伪或支持关系。",
+  "identity_resolution": "not_applicable",
+  "quality": {
+    "source_quality": "unknown",
+    "provenance_status": "unknown",
+    "quality_notes": "保存快照不提升来源等级；发布主体由调用者提供，未核验。"
+  },
+  "supports": {
+    "relevance": "unknown",
+    "supports_statement": "支持关系待人工复核。"
+  },
+  "limitations": [
+    "仅静态读取，不执行脚本；不核验来源真实性、身份或法律结论。"
+  ],
+  "uncertainty": "unknown",
+  "snapshot": {
+    "level": "L2",
+    "status": "saved",
+    "path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\html-source\\source.raw",
+    "sha256": "f84ca1e509258dbe15b403db8d4fe2aea71ed08478339f3ff5cedfe53b8b12f9",
+    "media_type": "text/html",
+    "notes": "{\"readable_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\html-source\\\\readable.txt\", \"readable_sha256\": \"4129aa46b694051d9ee29825f5a0295667e626e36c9ee45145e171ca3bf3669a\"}"
+  },
+  "human_review": "not_started"
+}

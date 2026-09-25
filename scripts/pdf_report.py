@@ -12,7 +12,7 @@ from time import perf_counter
 
 from report import blocks, build_model, render_markdown, render_html, json_text
 from validate_evidence import validate_evidence
-from static_source import PROJECT, scoped_path
+from static_source import PROJECT, scoped_path, task_run_root
 from pdf_bundle import load_dependencies, WHEELS, BUNDLE
 from pdf_source import load_pypdf
 
@@ -121,9 +121,11 @@ def readback(raw,model):
                 uri_links=uri_links,content_consistent=True)
 
 
-def generate_pdf(model_path,output,runtime):
+def generate_pdf(model_path,output,runtime,run_root=None):
     started=perf_counter()
-    model_path=scoped_path(model_path,MODEL_ROOT);output=scoped_path(output,PROJECT)
+    allowed=task_run_root(run_root) if run_root is not None else None
+    model_path=scoped_path(model_path,allowed or MODEL_ROOT);output=scoped_path(output,allowed or PROJECT)
+    if allowed is not None: runtime=scoped_path(runtime,allowed)
     if output.exists():raise FileExistsError('output must be a new directory')
     model=json.loads(model_path.read_text(encoding='utf-8-sig'))
     check_model(model)
@@ -148,6 +150,7 @@ def generate_pdf(model_path,output,runtime):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('model_path');p.add_argument('--output',required=True);p.add_argument('--runtime',required=True)
+    p.add_argument('--run-root')
     try: print(json_text(generate_pdf(**vars(p.parse_args()))));return 0
     except (OSError,ValueError,ImportError) as exc:print(f'ERROR: {exc}',file=sys.stderr);return 2
 

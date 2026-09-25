@@ -10,7 +10,7 @@ import sys
 from time import perf_counter
 from urllib.parse import urlsplit, quote
 
-from static_source import PROJECT, scoped_path
+from static_source import PROJECT, scoped_path, task_run_root
 from validate_evidence import validate_evidence
 
 INPUT_ROOT = PROJECT / 'tests' / 'fixtures' / 'report_sources'
@@ -28,7 +28,8 @@ def json_text(value):
     return json.dumps(value, ensure_ascii=False, indent=2) + '\n'
 
 
-def validate_inputs(items, base_dir):
+def validate_inputs(items, base_dir, *, run_root=None):
+    allowed = task_run_root(run_root) if run_root is not None else INPUT_ROOT
     if not isinstance(items, list) or not items:
         raise ValueError('nonempty Evidence array required')
     ids = set()
@@ -39,7 +40,7 @@ def validate_inputs(items, base_dir):
             if path:
                 if not isinstance(path, str) or not Path(path).is_absolute():
                     raise ValueError('snapshot path must be absolute within authorized synthetic root')
-                scoped_path(path, INPUT_ROOT)
+                scoped_path(path, allowed)
         try:
             errors = validate_evidence(item, existing_ids=ids, base_dir=base_dir)
         except (TypeError, ValueError, OSError) as exc:
@@ -164,16 +165,17 @@ def render_html(model):
     return '\n'.join(output) + '\n'
 
 
-def generate(evidence_path, task_path, output):
+def generate(evidence_path, task_path, output, *, run_root=None):
     start = perf_counter()
-    evidence_path = scoped_path(evidence_path, INPUT_ROOT)
-    task_path = scoped_path(task_path, INPUT_ROOT)
-    output = scoped_path(output, PROJECT)
+    allowed = task_run_root(run_root) if run_root is not None else None
+    evidence_path = scoped_path(evidence_path, allowed or INPUT_ROOT)
+    task_path = scoped_path(task_path, allowed or INPUT_ROOT)
+    output = scoped_path(output, allowed or PROJECT)
     if output.exists(): raise FileExistsError('output must be a new directory')
     items = json.loads(evidence_path.read_text(encoding='utf-8-sig'))
     task = json.loads(task_path.read_text(encoding='utf-8-sig'))
     stage = perf_counter()
-    validate_inputs(items, evidence_path.parent)
+    validate_inputs(items, evidence_path.parent, run_root=run_root)
     validation_ms = (perf_counter() - stage) * 1000
     stage = perf_counter()
     model = build_model(items, task)
@@ -203,6 +205,7 @@ def generate(evidence_path, task_path, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('evidence_path'); parser.add_argument('task_path'); parser.add_argument('--output', required=True)
+    parser.add_argument('--run-root')
     try:
         print(json_text(generate(**vars(parser.parse_args()))))
         return 0

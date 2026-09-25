@@ -10,7 +10,7 @@ import platform
 import sys
 from time import perf_counter
 
-from static_source import PROJECT, scoped_path
+from static_source import PROJECT, scoped_path, task_run_root
 from validate_evidence import validate_evidence, validate_file
 
 PDF_ROOT = PROJECT / 'tests' / 'fixtures' / 'pdf_sources'
@@ -40,10 +40,11 @@ def _json_bytes(value):
     return (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
 
 
-def collect_pdf(source, output, *, evidence_id, title, publisher, claim, excerpt, page):
+def collect_pdf(source, output, *, evidence_id, title, publisher, claim, excerpt, page, run_root=None):
     started = perf_counter()
-    source = scoped_path(source, PDF_ROOT)
-    output = scoped_path(output, PROJECT)
+    allowed = task_run_root(run_root) if run_root is not None else None
+    source = scoped_path(source, allowed or PDF_ROOT)
+    output = scoped_path(output, allowed or PROJECT)
     if source.suffix.lower() != '.pdf':
         raise ValueError('only an explicitly authorized test PDF is accepted')
     if output.exists():
@@ -181,6 +182,7 @@ def main():
     for name in ('evidence-id', 'title', 'publisher', 'claim', 'excerpt'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--page', type=int, required=True)
+    parser.add_argument('--run-root')
     try:
         path = collect_pdf(**vars(parser.parse_args()))
         obj = json.loads(path.read_text(encoding='utf-8'))

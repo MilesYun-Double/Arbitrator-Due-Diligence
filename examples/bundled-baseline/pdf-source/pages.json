@@ -1,0 +1,17 @@
+[
+  {
+    "page": 1,
+    "text": "合成资料：数字原生 PDF。\n",
+    "status": "text_extracted"
+  },
+  {
+    "page": 2,
+    "text": "第二页：仅用于流程测试。\nEvidence sample 2026 https://example.invalid/test\n",
+    "status": "text_extracted"
+  },
+  {
+    "page": 3,
+    "text": "",
+    "status": "no_text_extracted"
+  }
+]

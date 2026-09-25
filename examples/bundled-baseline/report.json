@@ -1,0 +1,208 @@
+{
+  "model_version": "1",
+  "task": {
+    "title": "完整合成链（非真实尽调）",
+    "scope": "只验证本地合成来源处理；未指定观点与案件主体。",
+    "enabled_modules": {
+      "identity": true,
+      "background": true,
+      "publications": true,
+      "viewpoints": false,
+      "relationships": true,
+      "conflicts": false
+    },
+    "assignments": {
+      "E-CHAIN-HTML": "background",
+      "E-CHAIN-TEXT": "background",
+      "E-CHAIN-PDF": "publications"
+    }
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "身份核对",
+      "status": "未提供证据 / unknown",
+      "evidence_ids": []
+    },
+    {
+      "key": "background",
+      "title": "专业背景",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-CHAIN-HTML",
+        "E-CHAIN-TEXT"
+      ]
+    },
+    {
+      "key": "publications",
+      "title": "公开著作",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-CHAIN-PDF"
+      ]
+    },
+    {
+      "key": "viewpoints",
+      "title": "指定观点",
+      "status": "未执行",
+      "evidence_ids": []
+    },
+    {
+      "key": "relationships",
+      "title": "公开专业关系",
+      "status": "未提供证据 / unknown",
+      "evidence_ids": []
+    },
+    {
+      "key": "conflicts",
+      "title": "冲突线索",
+      "status": "未执行",
+      "evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E-CHAIN-HTML",
+      "subject": {
+        "candidate_name": "流程测试来源（非人物）",
+        "identity_notes": "不执行人物身份核验"
+      },
+      "evidence_type": "source_supported_fact",
+      "claim": "仅验证合成材料中的摘录，不作人物或法律判断。",
+      "source": {
+        "title": "合成来源（非人物）",
+        "publisher": "ADD synthetic fixture",
+        "url": null,
+        "local_path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\inputs\\page.html",
+        "source_type": "user_provided_file",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-25T12:32:17.033536+00:00",
+        "retrieval_notes": "{\"requested_url\": null, \"final_url\": null, \"source_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\inputs\\\\page.html\", \"content_type\": \"text/html\", \"http_status\": null, \"source_sha256\": \"f84ca1e509258dbe15b403db8d4fe2aea71ed08478339f3ff5cedfe53b8b12f9\", \"readable_sha256\": \"4129aa46b694051d9ee29825f5a0295667e626e36c9ee45145e171ca3bf3669a\"}"
+      },
+      "excerpt": "合成机构成立于2020年。",
+      "excerpt_locator": "readable UTF-8 text sha256=4129aa46b694051d9ee29825f5a0295667e626e36c9ee45145e171ca3bf3669a; characters [5, 18) (zero-based Unicode)",
+      "context": "调用者提供的陈述；脚本仅验证摘录存在，不判断其真伪或支持关系。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "unknown",
+        "quality_notes": "保存快照不提升来源等级；发布主体由调用者提供，未核验。"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "支持关系待人工复核。"
+      },
+      "limitations": [
+        "仅静态读取，不执行脚本；不核验来源真实性、身份或法律结论。"
+      ],
+      "uncertainty": "unknown",
+      "snapshot": {
+        "level": "L2",
+        "status": "saved",
+        "path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\html-source\\source.raw",
+        "sha256": "f84ca1e509258dbe15b403db8d4fe2aea71ed08478339f3ff5cedfe53b8b12f9",
+        "media_type": "text/html",
+        "notes": "{\"readable_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\html-source\\\\readable.txt\", \"readable_sha256\": \"4129aa46b694051d9ee29825f5a0295667e626e36c9ee45145e171ca3bf3669a\"}"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-CHAIN-TEXT",
+      "subject": {
+        "candidate_name": "流程测试来源（非人物）",
+        "identity_notes": "不执行人物身份核验"
+      },
+      "evidence_type": "unresolved_lead",
+      "claim": "仅验证合成材料中的摘录，不作人物或法律判断。",
+      "source": {
+        "title": "合成来源（非人物）",
+        "publisher": "ADD synthetic fixture",
+        "url": null,
+        "local_path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\inputs\\source.txt",
+        "source_type": "user_provided_file",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-25T12:32:17.047712+00:00",
+        "retrieval_notes": "{\"requested_url\": null, \"final_url\": null, \"source_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\inputs\\\\source.txt\", \"content_type\": \"text/plain\", \"http_status\": null, \"source_sha256\": \"76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727\", \"readable_sha256\": \"76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727\"}"
+      },
+      "excerpt": "该材料仅用于流程测试。",
+      "excerpt_locator": "readable UTF-8 text sha256=76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727; characters [14, 25) (zero-based Unicode)",
+      "context": "调用者提供的陈述；脚本仅验证摘录存在，不判断其真伪或支持关系。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "unknown",
+        "quality_notes": "保存快照不提升来源等级；发布主体由调用者提供，未核验。"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "支持关系待人工复核。"
+      },
+      "limitations": [
+        "仅静态读取，不执行脚本；不核验来源真实性、身份或法律结论。"
+      ],
+      "uncertainty": "unknown",
+      "snapshot": {
+        "level": "L2",
+        "status": "saved",
+        "path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\text-source\\source.raw",
+        "sha256": "76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727",
+        "media_type": "text/plain",
+        "notes": "{\"readable_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\text-source\\\\readable.txt\", \"readable_sha256\": \"76ae7d40bd0c4035a8c09a5fb1066402f668177523190569178c92e6b70a4727\"}"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-CHAIN-PDF",
+      "subject": {
+        "candidate_name": "合成PDF测试来源（非人物）"
+      },
+      "evidence_type": "source_supported_fact",
+      "claim": "仅验证合成材料中的摘录，不作人物或法律判断。",
+      "source": {
+        "title": "合成来源（非人物）",
+        "publisher": "ADD synthetic fixture",
+        "url": null,
+        "local_path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\inputs\\digital.pdf",
+        "source_type": "user_provided_file",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-25T12:32:17.057712+00:00",
+        "retrieval_notes": "{\"input_sha256\": \"9a79452a8b056d6f73fbe32fad34f37918830fbf215cbcb39710c94724365e50\", \"pypdf_version\": \"6.19.0\", \"requested_page\": 2}"
+      },
+      "excerpt": "第二页：仅用于流程测试。",
+      "excerpt_locator": "PDF page 2 (one-based); text SHA256=cd795f3a82ce9b4a1b7e5f3ab20fb61eb995af28333f75a5762bb11f10814f3b; characters [0, 12) (zero-based Unicode)",
+      "context": "调用者提供陈述；仅验证页内摘录存在。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "语义支持关系待人工复核。"
+      },
+      "limitations": [
+        "仅数字原生PDF文本提取；未执行OCR、身份或来源真实性判断。",
+        "PDF page 3: no_text_extracted；不表示该页没有内容。"
+      ],
+      "uncertainty": "unknown",
+      "human_review": "not_started",
+      "snapshot": {
+        "level": "L3",
+        "status": "saved",
+        "path": "D:\\Arbitrator Due Diligence\\.tmp-add-run-issue13-final\\pdf-source\\source.pdf",
+        "sha256": "9a79452a8b056d6f73fbe32fad34f37918830fbf215cbcb39710c94724365e50",
+        "media_type": "application/pdf",
+        "notes": "{\"pages_path\": \"D:\\\\Arbitrator Due Diligence\\\\.tmp-add-run-issue13-final\\\\pdf-source\\\\pages.json\", \"pages_sha256\": \"6bdb36268627dc3fe149bba8c9f9610770c1f45f0c696f3d43ab79950d0f394d\"}"
+      }
+    }
+  ]
+}

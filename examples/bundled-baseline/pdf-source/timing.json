@@ -1,0 +1,24 @@
+{
+  "clock": "time.perf_counter",
+  "python": "3.12.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "pypdf_version": "6.19.0",
+  "pypdf_already_loaded": false,
+  "input_bytes": 2260,
+  "page_count": 3,
+  "page_extraction_ms": [
+    91.80409996770322,
+    89.94309999980032,
+    91.43289993517101
+  ],
+  "extraction_ms": 273.18579994607717,
+  "preflight_validation_ms": 0.019499915651977062,
+  "bundle_load_ms": 408.2493999740109,
+  "pdf_open_parse_ms": 3.0274000018835068,
+  "snapshot_evidence_ms": 1.0405001230537891,
+  "validation_ms": 8.41849995777011,
+  "total_ms": 819.9295999947935,
+  "result": "source_supported_fact",
+  "total_boundary": "collect_pdf entry through final Validator; excludes timing sidecar write and interpreter startup"
+}
