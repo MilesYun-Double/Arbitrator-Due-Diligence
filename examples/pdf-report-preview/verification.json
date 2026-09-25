@@ -1,0 +1,80 @@
+{
+  "pdf_sha256": "52e8631168c1a3c154f9de857de3861954d5395024d0ec7c45168ca4cb3c19d0",
+  "unit_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "count": 76,
+    "seconds": 7.918,
+    "result": "PASS"
+  },
+  "validator": {
+    "command": "python scripts/validate_evidence.py examples/evidence.valid.json",
+    "result": "VALID"
+  },
+  "visual_review": {
+    "tool": "existing Poppler pdftoppm -scale-to 1000 -png",
+    "pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "result": "Chinese/rare characters readable; long paragraphs and URLs wrap across pages; no clipping or overlap observed; page numbers and source index readable",
+    "boundary": "Main developer visual verification, not independent review or legal review",
+    "rendered_pages": [
+      {
+        "page": 1,
+        "sha256": "a008d3a2f0dd0e0f243d09822ee1aca67a16e462171995b774aa41cf6f595e45"
+      },
+      {
+        "page": 2,
+        "sha256": "b60bd866556b1f515dea05370908e69fcfa64c44604193a5f19449d425dc6ddf"
+      },
+      {
+        "page": 3,
+        "sha256": "d5b9d18ac515104576ed524324c9a066f8f9b69a8a05c0117d2fd2e40c6a53bf"
+      },
+      {
+        "page": 4,
+        "sha256": "69f498a5b1206e7a82464aa327c23577ffe15febfc161c3d1887f2944b60a89c"
+      },
+      {
+        "page": 5,
+        "sha256": "76bb69ca92dde90cf2beedbe4ee1098c9158aa178c37b627b516b179862e23ec"
+      },
+      {
+        "page": 6,
+        "sha256": "f8a722d224c019651e813efc049833037cbf47636a50dfdac764471319a35bf2"
+      },
+      {
+        "page": 7,
+        "sha256": "ea035ef0a0cb254ac1087e955e573ab7cbaa43df2e941b49d01f0820da5606f5"
+      },
+      {
+        "page": 8,
+        "sha256": "7fb705762428a7ff3cc1e568bfb62b11e79935b776ebfad923c7e9cbc4866050"
+      },
+      {
+        "page": 9,
+        "sha256": "4578894ad162604c522938235b642e7c21ad9fe0edf210bfe622993b87129434"
+      },
+      {
+        "page": 10,
+        "sha256": "768bdc0ae2994ac4dd358e9d0b201cd3929d4ac532eb999746992d075584216b"
+      },
+      {
+        "page": 11,
+        "sha256": "57f7d59759d9f21c919922f9ac7468cc2e582a3a36ecfafa3336e23196dc6b4f"
+      }
+    ]
+  },
+  "bbox_automated": "NOT_RUN: pdftotext executable unavailable; no install performed",
+  "repeated_outputs": "report.json/md/html/pdf byte-identical across three calls and relocated-package PDF",
+  "note": "Rendered PDF bytes are identical to final PDF; no claim of all-host/all-font/real-research acceptance"
+}

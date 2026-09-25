@@ -46,4 +46,4 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 
 ## Current scope and success standard
 
-V0.2 仅包含 Evidence Foundation。Capability 选型、随机仲裁员研究和完整 Report Renderer 属于后续阶段。当前成功标准是把公开研究结果形成可靠、结构化、可追溯、可验证并能进入统一报告链的证据基础。
+V0.2 Evidence Foundation 已完成；静态来源、数字原生 PDF 到 Evidence，以及 Canonical Report Model 到 Markdown / HTML 已通过累计独立审查与主控 Gate。当前处于 V1 最小能力实现，本轮仅补齐同一 Canonical Report Model 到 PDF，并验证耗时与打包条件。真实仲裁员研究和抽样尚未开始。当前成功标准是同一结构化模型的报告内容一致、来源可追溯、限制与人工复核状态保留，并有实际输出与运行证据。

@@ -5,3 +5,13 @@ vendor/pypdf-LICENSE.txt -text
 
 # Preserve measured report artifact byte counts across checkouts.
 examples/report-preview/* text eol=lf
+
+# PDF renderer dependencies and measured artifacts retain exact bytes.
+vendor/pdf/*.whl binary
+vendor/pdf/*.ttf binary
+vendor/pdf/*LICENSE.txt -text -diff
+vendor/pdf/*OFL.txt -text -diff
+examples/pdf-report-preview/*.pdf binary
+examples/pdf-report-preview/*.json text eol=lf
+examples/pdf-report-preview/*.md text eol=lf
+examples/pdf-report-preview/*.html text eol=lf

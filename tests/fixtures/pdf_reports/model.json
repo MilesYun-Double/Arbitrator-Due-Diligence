@@ -1,0 +1,368 @@
+{
+  "model_version": "1",
+  "task": {
+    "title": "合成法律工作报告：中文与分页验证",
+    "scope": "仅验证报告链；指定观点模块使用合成输入，案件冲突比对未启用。 字体测试：龘、靐、彧、喆、堃、甯、䶮；English 2026，标点（）：；！",
+    "enabled_modules": {
+      "identity": true,
+      "background": true,
+      "publications": true,
+      "viewpoints": true,
+      "relationships": true,
+      "conflicts": false
+    },
+    "assignments": {
+      "E-REPORT-1": "identity",
+      "E-REPORT-2": "viewpoints",
+      "E-REPORT-3": "relationships",
+      "E-REPORT-4": "identity",
+      "E-REPORT-5": "background",
+      "E-REPORT-6": "publications"
+    }
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "身份核对",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-REPORT-1",
+        "E-REPORT-4"
+      ]
+    },
+    {
+      "key": "background",
+      "title": "专业背景",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-REPORT-5"
+      ]
+    },
+    {
+      "key": "publications",
+      "title": "公开著作",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-REPORT-6"
+      ]
+    },
+    {
+      "key": "viewpoints",
+      "title": "指定观点",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-REPORT-2"
+      ]
+    },
+    {
+      "key": "relationships",
+      "title": "公开专业关系",
+      "status": "已提供证据（不代表完整覆盖）",
+      "evidence_ids": [
+        "E-REPORT-3"
+      ]
+    },
+    {
+      "key": "conflicts",
+      "title": "冲突线索",
+      "status": "未执行",
+      "evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E-REPORT-1",
+      "subject": {
+        "candidate_name": "合成测试主体（非真实人物）",
+        "candidate_id": null,
+        "identity_notes": "测试材料，无真实身份核验"
+      },
+      "evidence_type": "source_supported_fact",
+      "claim": "合成名册列有测试主体（非真实人物）。",
+      "source": {
+        "title": "合成来源 1",
+        "publisher": "ADD 合成夹具",
+        "url": "https://example.invalid/source/1",
+        "local_path": null,
+        "source_type": "official_roster",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-24T12:00:00+08:00",
+        "retrieval_notes": "示例，不代表真实检索"
+      },
+      "excerpt": "合成名册列有测试主体（非真实人物）。",
+      "excerpt_locator": "合成条目 1",
+      "context": "长段落开始。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。本段仅为分页测试，保留不确定性与人工复核边界。长段落结束。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "仅供流程测试，语义由人工复核。"
+      },
+      "limitations": [
+        "合成限制 1：未进行真实检索。",
+        "公开关系不等于利益冲突。"
+      ],
+      "uncertainty": "limited",
+      "snapshot": {
+        "level": "L1",
+        "status": "not_saved",
+        "path": null,
+        "sha256": null,
+        "media_type": "text/plain",
+        "notes": "保留最小摘录"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-REPORT-2",
+      "subject": {
+        "candidate_name": "合成测试主体（非真实人物）",
+        "candidate_id": null,
+        "identity_notes": "测试材料，无真实身份核验"
+      },
+      "evidence_type": "public_viewpoint",
+      "claim": "合成文章观点仅在合同约定条件下适用。",
+      "source": {
+        "title": "合成来源 2",
+        "publisher": "ADD 合成夹具",
+        "url": "https://example.invalid/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/long-segment-2026/end",
+        "local_path": null,
+        "source_type": "official_roster",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-24T12:00:00+08:00",
+        "retrieval_notes": "示例，不代表真实检索"
+      },
+      "excerpt": "合成文章观点仅在合同约定条件下适用。",
+      "excerpt_locator": "合成条目 2",
+      "context": "合成上下文：不得外推真实人物或案件。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "仅供流程测试，语义由人工复核。"
+      },
+      "limitations": [
+        "合成限制 2：未进行真实检索。",
+        "公开关系不等于利益冲突。"
+      ],
+      "uncertainty": "limited",
+      "snapshot": {
+        "level": "L1",
+        "status": "not_saved",
+        "path": null,
+        "sha256": null,
+        "media_type": "text/plain",
+        "notes": "保留最小摘录"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-REPORT-3",
+      "subject": {
+        "candidate_name": "合成测试主体（非真实人物）",
+        "candidate_id": null,
+        "identity_notes": "测试材料，无真实身份核验"
+      },
+      "evidence_type": "relationship_fact",
+      "claim": "合成记录显示两测试机构共同举办活动，不据此推断私人关系。",
+      "source": {
+        "title": "合成来源 3",
+        "publisher": "ADD 合成夹具",
+        "url": "https://example.invalid/source/3",
+        "local_path": null,
+        "source_type": "official_roster",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-24T12:00:00+08:00",
+        "retrieval_notes": "示例，不代表真实检索"
+      },
+      "excerpt": "合成记录显示两测试机构共同举办活动，不据此推断私人关系。",
+      "excerpt_locator": "合成条目 3",
+      "context": "合成上下文：不得外推真实人物或案件。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "仅供流程测试，语义由人工复核。"
+      },
+      "limitations": [
+        "合成限制 3：未进行真实检索。",
+        "公开关系不等于利益冲突。"
+      ],
+      "uncertainty": "limited",
+      "snapshot": {
+        "level": "L1",
+        "status": "not_saved",
+        "path": null,
+        "sha256": null,
+        "media_type": "text/plain",
+        "notes": "保留最小摘录"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-REPORT-4",
+      "subject": {
+        "candidate_name": "合成测试主体（非真实人物）",
+        "candidate_id": null,
+        "identity_notes": "测试材料，无真实身份核验"
+      },
+      "evidence_type": "unresolved_lead",
+      "claim": "同名条目尚未核实身份，不能合并。",
+      "source": {
+        "title": "合成来源 4",
+        "publisher": "ADD 合成夹具",
+        "url": "https://example.invalid/source/4",
+        "local_path": null,
+        "source_type": "official_roster",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-24T12:00:00+08:00",
+        "retrieval_notes": "示例，不代表真实检索"
+      },
+      "excerpt": null,
+      "excerpt_locator": null,
+      "context": "合成上下文：不得外推真实人物或案件。",
+      "identity_resolution": "unresolved_same_name",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "仅供流程测试，语义由人工复核。"
+      },
+      "limitations": [
+        "合成限制 4：未进行真实检索。",
+        "公开关系不等于利益冲突。"
+      ],
+      "uncertainty": "unknown",
+      "snapshot": {
+        "level": "L1",
+        "status": "not_saved",
+        "path": null,
+        "sha256": null,
+        "media_type": "text/plain",
+        "notes": "保留最小摘录"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-REPORT-5",
+      "subject": {
+        "candidate_name": "合成测试主体（非真实人物）",
+        "candidate_id": null,
+        "identity_notes": "测试材料，无真实身份核验"
+      },
+      "evidence_type": "unknown_insufficient_coverage",
+      "claim": "本次未检索到合成事项；不表示事项不存在。",
+      "source": {
+        "title": "合成来源 5",
+        "publisher": "ADD 合成夹具",
+        "url": "https://example.invalid/source/5",
+        "local_path": null,
+        "source_type": "official_roster",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-24T12:00:00+08:00",
+        "retrieval_notes": "示例，不代表真实检索"
+      },
+      "excerpt": null,
+      "excerpt_locator": null,
+      "context": "合成上下文：不得外推真实人物或案件。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "仅供流程测试，语义由人工复核。"
+      },
+      "limitations": [
+        "合成限制 5：未进行真实检索。",
+        "公开关系不等于利益冲突。"
+      ],
+      "uncertainty": "unknown",
+      "snapshot": {
+        "level": "L1",
+        "status": "not_saved",
+        "path": null,
+        "sha256": null,
+        "media_type": "text/plain",
+        "notes": "保留最小摘录"
+      },
+      "human_review": "not_started"
+    },
+    {
+      "evidence_id": "E-REPORT-6",
+      "subject": {
+        "candidate_name": "合成测试主体（非真实人物）",
+        "candidate_id": null,
+        "identity_notes": "测试材料，无真实身份核验"
+      },
+      "evidence_type": "derived_interpretation",
+      "claim": "基于合成资料的解释仍需人工核查。",
+      "source": {
+        "title": "合成来源 6",
+        "publisher": "ADD 合成夹具",
+        "url": "https://example.invalid/source/6",
+        "local_path": null,
+        "source_type": "official_roster",
+        "published_date": null,
+        "event_date": null
+      },
+      "retrieval": {
+        "retrieved_at": "2026-09-24T12:00:00+08:00",
+        "retrieval_notes": "示例，不代表真实检索"
+      },
+      "excerpt": null,
+      "excerpt_locator": null,
+      "context": "合成上下文：不得外推真实人物或案件。",
+      "identity_resolution": "not_applicable",
+      "quality": {
+        "source_quality": "unknown",
+        "provenance_status": "user_supplied"
+      },
+      "supports": {
+        "relevance": "unknown",
+        "supports_statement": "仅供流程测试，语义由人工复核。"
+      },
+      "limitations": [
+        "合成限制 6：未进行真实检索。",
+        "公开关系不等于利益冲突。"
+      ],
+      "uncertainty": "unknown",
+      "snapshot": {
+        "level": "L1",
+        "status": "not_saved",
+        "path": null,
+        "sha256": null,
+        "media_type": "text/plain",
+        "notes": "保留最小摘录"
+      },
+      "human_review": "not_started"
+    }
+  ]
+}
