@@ -1,0 +1,20 @@
+{
+  "title": "合成证据报告（非真实尽调）",
+  "scope": "仅验证报告链；指定观点模块使用合成输入，案件冲突比对未启用。",
+  "enabled_modules": {
+    "identity": true,
+    "background": true,
+    "publications": true,
+    "viewpoints": true,
+    "relationships": true,
+    "conflicts": false
+  },
+  "assignments": {
+    "E-REPORT-1": "identity",
+    "E-REPORT-2": "viewpoints",
+    "E-REPORT-3": "relationships",
+    "E-REPORT-4": "identity",
+    "E-REPORT-5": "background",
+    "E-REPORT-6": "publications"
+  }
+}

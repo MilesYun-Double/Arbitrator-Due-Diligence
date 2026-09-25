@@ -1,0 +1,61 @@
+{
+  "command": "python -E -S tests/measure_report.py --output <new directory>",
+  "note": "Synthetic 6-Evidence sample only; no OS cache flush, no SLA",
+  "results": [
+    {
+      "mode": "fresh CLI (-E -S)",
+      "external_wall_ms": 327.226199908182,
+      "clock": "time.perf_counter",
+      "python": "3.12.4",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "evidence_count": 6,
+      "output_bytes": {
+        "report.json": 11689,
+        "report.md": 16603,
+        "report.html": 20812
+      },
+      "validation_ms": 0.13109995052218437,
+      "model_ms": 0.14350004494190216,
+      "markdown_ms": 1.1593999806791544,
+      "html_ms": 0.44949993025511503,
+      "total_ms": 125.11159991845489,
+      "total_boundary": "generate entry through artifacts/metadata; excludes timing sidecar write, interpreter startup and module imports"
+    },
+    {
+      "mode": "same process 1 (no hidden warmup)",
+      "clock": "time.perf_counter",
+      "python": "3.12.4",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "evidence_count": 6,
+      "output_bytes": {
+        "report.json": 11689,
+        "report.md": 16603,
+        "report.html": 20812
+      },
+      "validation_ms": 0.10950001887977123,
+      "model_ms": 0.14889996964484453,
+      "markdown_ms": 1.219899975694716,
+      "html_ms": 0.44299999717622995,
+      "total_ms": 127.48559995088726,
+      "total_boundary": "generate entry through artifacts/metadata; excludes timing sidecar write, interpreter startup and module imports"
+    },
+    {
+      "mode": "same process 2 (no hidden warmup)",
+      "clock": "time.perf_counter",
+      "python": "3.12.4",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "evidence_count": 6,
+      "output_bytes": {
+        "report.json": 11689,
+        "report.md": 16603,
+        "report.html": 20812
+      },
+      "validation_ms": 0.08919998072087765,
+      "model_ms": 0.11979998089373112,
+      "markdown_ms": 1.0994999902322888,
+      "html_ms": 0.49270002637058496,
+      "total_ms": 4.677899996750057,
+      "total_boundary": "generate entry through artifacts/metadata; excludes timing sidecar write, interpreter startup and module imports"
+    }
+  ]
+}

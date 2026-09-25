@@ -1,0 +1,17 @@
+{
+  "clock": "time.perf_counter",
+  "python": "3.12.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "evidence_count": 6,
+  "output_bytes": {
+    "report.json": 11689,
+    "report.md": 16603,
+    "report.html": 20812
+  },
+  "validation_ms": 0.13109995052218437,
+  "model_ms": 0.14350004494190216,
+  "markdown_ms": 1.1593999806791544,
+  "html_ms": 0.44949993025511503,
+  "total_ms": 125.11159991845489,
+  "total_boundary": "generate entry through artifacts/metadata; excludes timing sidecar write, interpreter startup and module imports"
+}

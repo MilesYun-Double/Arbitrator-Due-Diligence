@@ -3,7 +3,7 @@
 > 更新日期：2026-09-25
 > 正式名称：Arbitrator Due Diligence
 > 当前阶段：V1 最小能力实现
-> 当前获准子阶段：Digital PDF → Snapshot → Evidence + timing measurement
+> 当前获准子阶段：Validated Evidence → Canonical Report Model → Markdown / HTML + timing measurement
 
 本项目面向中国大陆商事仲裁案件中的律师、企业法务和争议解决团队，围绕指定仲裁机构及有限候选范围，整理仲裁员身份、专业背景、公开著作与观点、公开专业关系事实、冲突线索、来源限制和人工复核事项。
 
@@ -15,8 +15,9 @@
 - V0.2 Evidence Foundation：PASS（已通过独立复审）。
 - Capability Requirements / Source Evaluation：PASS。
 - Static Source → Snapshot → Evidence：PASS（Issue #6 已主控验收关闭）。
-- 当前阶段：V1 最小能力实现；当前获准子阶段：Digital PDF → Snapshot → Evidence + timing measurement。
-- 当前主要产物：Evidence Schema、Snapshot Policy、Validator、静态来源/PDF提取脚本、测试与合成示例、实测耗时记录。
+- Digital PDF → Snapshot → Evidence：PASS（Issue #7 已主控验收关闭）。
+- 当前阶段：V1 最小能力实现；当前获准子阶段：Validated Evidence → Canonical Report Model → Markdown / HTML + timing measurement。
+- 当前主要产物：Evidence Schema、Snapshot Policy、Validator、静态来源/PDF提取脚本、Canonical Report Model、Markdown/HTML Renderer、测试与合成示例、实测耗时记录。
 - 当前工作区：`D:\Arbitrator Due Diligence`。
 - 真实人物试用报告保留在本地 `reports/`，不纳入公开仓库。
 - 当前没有数据库、后台服务、UI、外部 API 或多 Agent 调度平台。
@@ -40,7 +41,7 @@
 ## 当前阶段之后的已确认路线
 
 ```text
-V1 最小能力实现（当前仅获准 Digital PDF → Snapshot → Evidence + timing measurement）
+V1 最小能力实现（当前仅获准 Validated Evidence → Canonical Report Model → Markdown / HTML + timing measurement）
 → Bundled Capability Baseline
 → 从实际 CIETAC 官方候选范围按预先固定规则随机抽取 5 名普通仲裁员
 → 锁定样本
