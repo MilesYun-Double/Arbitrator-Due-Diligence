@@ -79,4 +79,26 @@ class EvidenceValidatorTests(unittest.TestCase):
         y=json.loads(json.dumps(BASE)); y["snapshot"]["sha256"]="bad"; cases.append(("snapshot hash",y))
         for label, bad in cases:
             with self.subTest(label=label): self.assertTrue(validate_evidence(bad))
+    def test_optional_root_fields_can_be_omitted_for_non_source_backed(self):
+        x=json.loads(json.dumps(BASE))
+        x["evidence_type"]="unresolved_lead"
+        x["supports"]={"relevance":"lead_only","supports_statement":"仅为待核查线索。"}
+        x.pop("excerpt",None); x.pop("excerpt_locator",None); x.pop("context",None)
+        self.assertEqual(validate_evidence(x), [])
+
+    def test_source_backed_conditional_fields_remain_required(self):
+        x=json.loads(json.dumps(BASE)); x["excerpt"]=None; x.pop("excerpt_locator",None)
+        self.assertTrue(validate_evidence(x))
+        y=json.loads(json.dumps(BASE)); y["excerpt_locator"]=""
+        self.assertTrue(validate_evidence(y))
+
+    def test_optional_field_boundaries_match_schema(self):
+        x=json.loads(json.dumps(BASE)); x["source"]["local_path"]=""; self.assertEqual(validate_evidence(x), [])
+        y=json.loads(json.dumps(BASE)); y["snapshot"]["path"]=""; self.assertEqual(validate_evidence(y), [])
+        z=json.loads(json.dumps(BASE)); z["snapshot"]["media_type"]=""; self.assertEqual(validate_evidence(z), [])
+
+    def test_snapshot_saved_and_user_provided_require_nonempty_path(self):
+        for status in ("saved", "user_provided"):
+            x=json.loads(json.dumps(BASE)); x["snapshot"]["status"]=status; x["snapshot"]["path"]=""
+            with self.subTest(status=status): self.assertTrue(validate_evidence(x))
 if __name__=='__main__': unittest.main()

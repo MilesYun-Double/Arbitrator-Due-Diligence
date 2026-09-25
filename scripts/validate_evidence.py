@@ -40,7 +40,7 @@ def _nullable_string(errors, path, value, nonempty=False):
 def validate_evidence(obj, *, existing_ids=None, base_dir=None):
     errors=[]; existing_ids=existing_ids or set()
     root_allowed={"evidence_id","subject","evidence_type","claim","source","retrieval","excerpt","excerpt_locator","context","identity_resolution","quality","supports","limitations","uncertainty","snapshot","human_review"}
-    root_required=root_allowed
+    root_required={"evidence_id","subject","evidence_type","claim","source","retrieval","identity_resolution","quality","supports","limitations","uncertainty","snapshot","human_review"}
     if not isinstance(obj, dict): return ["$: must be object"]
     _object(errors,"$",obj,root_allowed,root_required)
     eid=obj.get("evidence_id")
@@ -59,7 +59,7 @@ def validate_evidence(obj, *, existing_ids=None, base_dir=None):
             if not (isinstance(src.get(k),str) and src[k].strip()): errors.append(f"source.{k}: must be non-empty string")
         stypes={"official_roster","official_profile","official_rule","government_or_court","original_publication","publisher_page","conference_or_event","institutional_profile","formal_media","secondary_or_aggregator","search_snippet","user_provided_file","other"}
         if src.get("source_type") not in stypes: errors.append("source.source_type: invalid enum")
-        for k in ("url","local_path"): _nullable_string(errors,f"source.{k}",src.get(k),nonempty=True)
+        for k in ("url","local_path"): _nullable_string(errors,f"source.{k}",src.get(k))
         if not src.get("url") and not src.get("local_path"): errors.append("source: url or local_path required")
         if src.get("url") is not None and isinstance(src.get("url"),str) and not URI.fullmatch(src["url"]): errors.append("source.url: invalid URI")
         for k in DATE_FIELDS:
@@ -90,7 +90,7 @@ def validate_evidence(obj, *, existing_ids=None, base_dir=None):
     if _object(errors,"snapshot",snap,{"level","status","path","sha256","media_type","notes"},{"level","status"}):
         if snap.get("level") not in {"L0","L1","L2","L3","L4"}: errors.append("snapshot.level: invalid enum")
         if snap.get("status") not in {"not_saved","saved","unavailable","user_provided"}: errors.append("snapshot.status: invalid enum")
-        for k in ("path","sha256","media_type","notes"): _nullable_string(errors,f"snapshot.{k}",snap.get(k),nonempty=(k in {"path","media_type"}))
+        for k in ("path","sha256","media_type","notes"): _nullable_string(errors,f"snapshot.{k}",snap.get(k))
         path=snap.get("path"); sha=snap.get("sha256")
         if snap.get("status") in {"saved","user_provided"} and not (isinstance(path,str) and path): errors.append("snapshot.path: required for saved snapshot")
         if sha is not None and (not isinstance(sha,str) or not HEX64.fullmatch(sha)): errors.append("snapshot.sha256: must be 64 hex characters or null")
