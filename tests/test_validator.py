@@ -60,4 +60,23 @@ class EvidenceValidatorTests(unittest.TestCase):
                 x["source"].pop("local_path",None)
                 x["source"].update(trace)
                 self.assertEqual(not validate_evidence(x), expected)
+    def test_schema_structural_invalid_objects_are_rejected(self):
+        cases=[]
+        x=json.loads(json.dumps(BASE)); x["unexpected"]=1; cases.append(("root unknown",x))
+        for path, mutate in [
+            ("subject unknown", lambda z:z["subject"].update({"unexpected":1})),
+            ("source type", lambda z:z["source"].update({"url":123})),
+            ("source enum", lambda z:z["source"].update({"source_type":"bogus"})),
+            ("retrieval notes", lambda z:z["retrieval"].update({"retrieval_notes":123})),
+            ("quality unknown", lambda z:z["quality"].update({"unexpected":1})),
+            ("supports type", lambda z:z["supports"].update({"supports_statement":123})),
+            ("snapshot unknown", lambda z:z["snapshot"].update({"unexpected":1})),
+        ]:
+            y=json.loads(json.dumps(BASE)); mutate(y); cases.append((path,y))
+        y=json.loads(json.dumps(BASE)); y["subject"]["candidate_id"]=123; cases.append(("subject nullable type",y))
+        y=json.loads(json.dumps(BASE)); y["evidence_type"]="bogus"; cases.append(("evidence enum",y))
+        y=json.loads(json.dumps(BASE)); y["limitations"]=[1]; cases.append(("limitations array",y))
+        y=json.loads(json.dumps(BASE)); y["snapshot"]["sha256"]="bad"; cases.append(("snapshot hash",y))
+        for label, bad in cases:
+            with self.subTest(label=label): self.assertTrue(validate_evidence(bad))
 if __name__=='__main__': unittest.main()
