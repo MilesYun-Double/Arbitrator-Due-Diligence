@@ -2,7 +2,8 @@
 
 > 更新日期：2026-09-25
 > 正式名称：Arbitrator Due Diligence
-> 当前阶段：V0.2 Evidence Foundation → 主控验收 → 独立审查
+> 当前阶段：V1 最小能力实现
+> 当前获准子阶段：Static Source → Snapshot → Evidence
 
 本项目面向中国大陆商事仲裁案件中的律师、企业法务和争议解决团队，围绕指定仲裁机构及有限候选范围，整理仲裁员身份、专业背景、公开著作与观点、公开专业关系事实、冲突线索、来源限制和人工复核事项。
 
@@ -11,8 +12,10 @@
 ## 当前范围
 
 - 首轮机构：贸仲（CIETAC）。
-- 当前阶段：V0.2 Evidence Foundation → 主控验收 → 独立审查。
-- 当前主要产物：Evidence Schema、Snapshot Policy、Validator、测试和合成示例。
+- V0.2 Evidence Foundation：PASS（已通过独立复审）。
+- Capability Requirements / Source Evaluation：PASS。
+- 当前阶段：V1 最小能力实现；当前获准子阶段：Static Source → Snapshot → Evidence。
+- 当前主要产物：Evidence Schema、Snapshot Policy、Validator、静态来源读取脚本、测试和合成示例。
 - 当前工作区：`D:\Arbitrator Due Diligence`。
 - 真实人物试用报告保留在本地 `reports/`，不纳入公开仓库。
 - 当前没有数据库、后台服务、UI、外部 API 或多 Agent 调度平台。
@@ -36,8 +39,7 @@
 ## 当前阶段之后的已确认路线
 
 ```text
-独立审查通过
-→ Capability Requirements / Source Evaluation
+V1 最小能力实现（当前仅获准 Static Source → Snapshot → Evidence）
 → Bundled Capability Baseline
 → 从实际 CIETAC 官方候选范围按预先固定规则随机抽取 5 名普通仲裁员
 → 锁定样本
@@ -58,4 +60,4 @@ Evidence 字段和 Snapshot 规则分别以 `schemas/evidence.schema.json` 和 `
 
 ## 治理
 
-用户是最终决策人；主对话是项目主控；主开发负责获准范围内的实现和证据；独立 Codex 对话负责独立审查。当前下一 Gate 是独立审查，不由主开发自行进入下一阶段。
+用户是最终决策人；主对话是项目主控；主开发负责获准范围内的实现和证据；独立 Codex 对话负责独立审查。本轮完成后等待主控验收，不由主开发自行进入下一阶段。
