@@ -1,5 +1,13 @@
 # Issue #9 实际合成 PDF 产物
 
+## M1 修复后的当前分发记录
+
+当前 ReportLab 为 `reportlab-4.4.10-add-runtime-1.zip`，已排除全部七个 DarkGarden 文件；PDF 原字节不变。`darkgarden-derivation-check.json` 记录固定原包重建及保留文件逐字节检查；`darkgarden-fix-baseline.json` 和 `darkgarden-fix-packaging.json` 是修复后重新实测结果。81 项测试（原76 + 新5）通过；24文件候选 ZIP 递归检查417个成员，未包含原wheel或DarkGarden组件，禁用site-packages执行成功。
+
+以下原始数据作为修复前历史证据保留，不能当作当前依赖包的 timing / size / 许可结论。
+
+## 原始实现记录
+
 report.json、report.md、report.html、report.pdf、timing.json 来自最终实现的一次真实CLI，未手工改写。baseline.json 是同次冷/已加载路径实测，packaging.json 是23文件独立目录ZIP解包烟测；verification.json 记录76项回归及11页视觉检查，均为主开发证据。
 
 PDF：11页A4、88039字节、文字可提取。嵌入字体：LXGW WenKai Regular 1.522，不使用系统后备。6条合成Evidence含罕见字、长段落和长URL，非真实人物资料。PDF SHA-256：52e8631168c1a3c154f9de857de3861954d5395024d0ec7c45168ca4cb3c19d0。

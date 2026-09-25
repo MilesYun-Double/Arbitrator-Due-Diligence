@@ -15,3 +15,5 @@ examples/pdf-report-preview/*.pdf binary
 examples/pdf-report-preview/*.json text eol=lf
 examples/pdf-report-preview/*.md text eol=lf
 examples/pdf-report-preview/*.html text eol=lf
+
+vendor/pdf/*.zip binary

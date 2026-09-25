@@ -1,4 +1,4 @@
-"""Pinned PDF wheel closure; unpack locally, never pip install or use host packages."""
+"""Pinned PDF runtime artifact closure; unpack locally, never pip install or use host packages."""
 import hashlib
 import importlib
 import os
@@ -12,7 +12,7 @@ from static_source import PROJECT, scoped_path
 
 BUNDLE = PROJECT / 'vendor/pdf'
 WHEELS = {
-    'reportlab-4.4.10-py3-none-any.whl': '5abc815746ae2bc44e7ff25db96814f921349ca814c992c7eac3c26029bf7c24',
+    'reportlab-4.4.10-add-runtime-1.zip': '3217e78468b2d0d6f47512a2d467e2433500b006ccec2d5b5d04ab191b5600d1',
     'pillow-12.3.0-cp312-cp312-win_amd64.whl': 'a2b55dd6b2a4c4b7d87ffa56bdb33fdc5fdb9a462173861a7bc097f17d91cb09',
     'charset_normalizer-3.4.7-py3-none-any.whl': '3dce51d0f5e7951f8bb4900c257dad282f49190fdbebecd4ba99bcc41fef404d',
 }
@@ -35,7 +35,7 @@ def load_dependencies(runtime):
     fresh = not runtime.exists()
     expected = set()
     expanded = 0
-    # Authenticate all wheels before writing/executing any dependency.
+    # Authenticate all artifacts before writing/executing any dependency.
     for name, digest in WHEELS.items():
         path = scoped_path(BUNDLE / name, PROJECT)
         if hashlib.sha256(path.read_bytes()).hexdigest() != digest:
@@ -52,7 +52,7 @@ def load_dependencies(runtime):
                     target.parent.mkdir(parents=True, exist_ok=True)
                     with target.open('xb') as stream: stream.write(data)
                 elif not target.is_file() or hashlib.sha256(target.read_bytes()).digest() != hashlib.sha256(data).digest():
-                    raise ValueError('runtime differs from pinned wheels; use a new directory')
+                    raise ValueError('runtime differs from pinned artifacts; use a new directory')
     actual = set()
     for current, directories, files in os.walk(runtime, followlinks=False):
         for name in directories + files:

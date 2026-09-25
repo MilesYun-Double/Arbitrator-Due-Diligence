@@ -27,3 +27,7 @@ PDF写盘后用原有pypdf做readback；单独记录导入+回读时间，不建
 已有模型内absolute source/snapshot路径仅展示，不解引用。输入必须已处于获准合成根；没有针对不受信任大文件的资源沙箱。生成或readback失败可能留下新目录中的部分产物，必须以CLI退出码及timing完成结果为准，不自动删除。依赖运行目录由任务明确归属，保持可核验，不读个人配置。
 
 本机未提供pdftotext，未安装；因此未完成其bbox自动边界检查，不将逐页视觉检查冒充坐标级证明。
+
+## Issue #9 M1 分发修复
+
+ReportLab 改为经固定 upstream wheel 派生的 ADD runtime ZIP，完整排除未使用的 DarkGarden 组件；不改 renderer、中文字体或 PDF 内容。来源和裁剪记录见 `vendor/pdf/derivation.json`。最终 package smoke 递归检查 ZIP / wheel 成员，并与既有 PDF 比较原字节。`wheel_bytes` 保留既有计时字段名，当前含一个 runtime ZIP 和两个 wheel；新数据见 `darkgarden-fix-baseline.json` / `darkgarden-fix-packaging.json`，不沿用原闭包数值。

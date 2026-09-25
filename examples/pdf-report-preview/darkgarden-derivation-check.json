@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "upstream_sha256": "5abc815746ae2bc44e7ff25db96814f921349ca814c992c7eac3c26029bf7c24",
+  "artifact_sha256": "3217e78468b2d0d6f47512a2d467e2433500b006ccec2d5b5d04ab191b5600d1",
+  "artifact_bytes": 1689524,
+  "excluded_files": [
+    {
+      "path": "reportlab/fonts/DarkGarden-changelog.txt",
+      "bytes": 504,
+      "sha256": "dbb09ff331d1597125f754d9426bb8cef78fb956397790de44269db8c0a9e54d"
+    },
+    {
+      "path": "reportlab/fonts/DarkGarden-copying-gpl.txt",
+      "bytes": 17976,
+      "sha256": "1b2a567f289f66a143c56353e7b3d4fa5862514a5e3c5cfdf8b02ee5e5aaa953"
+    },
+    {
+      "path": "reportlab/fonts/DarkGarden-copying.txt",
+      "bytes": 1318,
+      "sha256": "3cd1020510efa7f6b3166a5a2740f92bd664a695ea179e0bda442e74cd0ef3a4"
+    },
+    {
+      "path": "reportlab/fonts/DarkGarden-readme.txt",
+      "bytes": 4122,
+      "sha256": "b327963fcf0d88333d293751dd0b113c8c02f35d61440f578a14681a8ea734a0"
+    },
+    {
+      "path": "reportlab/fonts/DarkGarden.sfd",
+      "bytes": 519634,
+      "sha256": "7ff67c9eda02fc751f5ca04394109c38b2d723e105506e58141fc9363662d6ba"
+    },
+    {
+      "path": "reportlab/fonts/DarkGardenMK.afm",
+      "bytes": 10351,
+      "sha256": "932bb1acc08358d87f326e891b78cde9e7ef60bfd4fb749cfb48ab9e2a2fe6eb"
+    },
+    {
+      "path": "reportlab/fonts/DarkGardenMK.pfb",
+      "bytes": 79824,
+      "sha256": "3633d5aed5c0fc3ec9302ee6995d0bb87a2926793ede5bb654287d9cb896ec95"
+    }
+  ],
+  "retained_byte_identical_files": 188,
+  "record_rebuilt": true,
+  "rebuild_byte_identical": true
+}

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "tests": {
+    "command": "python -B -m unittest discover -s tests -v",
+    "count": 81,
+    "existing": 76,
+    "new": 5,
+    "elapsed_seconds": 9.881,
+    "result": "OK"
+  },
+  "validator": {
+    "command": "python scripts/validate_evidence.py examples/evidence.valid.json",
+    "result": "VALID"
+  },
+  "diff_check": "git diff --check: PASS",
+  "pdf_sha256": "52e8631168c1a3c154f9de857de3861954d5395024d0ec7c45168ca4cb3c19d0",
+  "pdf_bytes_equal_to_baseline": true,
+  "renderer_and_font_unchanged": true,
+  "scope": "Issue #9 M1 only; no new research or stage transition",
+  "review_role": "main developer; independent re-review pending"
+}

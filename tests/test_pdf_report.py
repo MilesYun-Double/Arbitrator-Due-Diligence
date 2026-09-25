@@ -16,12 +16,13 @@ class PDFReportTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.model=json.loads((ROOT/'tests/fixtures/pdf_reports/model.json').read_text(encoding='utf-8'))
-        cls.runtime=ROOT/'.tmp-issue9-test-runtime'
+        cls.runtime=ROOT/'.tmp-issue9-fixed-test-runtime'
         pdf.load_dependencies(cls.runtime)
 
     def test_same_model_content_and_layout(self):
         before=deepcopy(self.model)
         raw,meta=pdf.render_pdf(self.model, self.runtime)
+        self.assertEqual(raw,(ROOT/'examples/pdf-report-preview/report.pdf').read_bytes())
         checked=pdf.readback(raw,self.model)
         self.assertGreater(checked['page_count'],1)
         self.assertEqual(self.model,before)
