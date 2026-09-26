@@ -3,7 +3,7 @@
 > 更新日期：2026-09-26
 > 正式名称：Arbitrator Due Diligence
 > 当前阶段：V1 最小能力实现
-> 当前状态：第一名真实完整链路 Gate 完成，等待下一阶段决策
+> 当前状态：Presentation UX 设计阶段
 
 本项目面向中国大陆商事仲裁案件中的律师、企业法务和争议解决团队，围绕指定仲裁机构及有限候选范围，整理仲裁员身份、专业背景、公开著作与观点、公开专业关系事实、冲突线索、来源限制和人工复核事项。
 
@@ -120,7 +120,7 @@ HTML 未来只做**只读交互阅读**：
 - 审批流；
 - 写回 Evidence 或报告状态。
 
-当前尚未授权 UI 实现、Renderer 重构或创建 `REPORT_DESIGN.md`。
+当前已授权进入 Presentation UX **设计阶段**，仅允许创建/完善 `REPORT_DESIGN.md` 和验收标准；尚未授权修改 Renderer 或实现 UI。
 
 ## 产品边界
 
@@ -140,21 +140,20 @@ HTML 未来只做**只读交互阅读**：
 
 ## 当前路线
 
+用户已固定后续顺序：
+
 ```text
-V1 最小能力实现
-→ Bundled Capability Baseline：PASS
-→ CIETAC 5 人锁样：PASS
-→ real research run repair：PASS
-→ 第一名真人链：REAL_CHAIN_PARTIAL / Gate PASS
-→ CURRENT: 等待用户决定下一阶段
+第一名真人链：REAL_CHAIN_PARTIAL / Gate PASS
+→ Phase 2: Presentation UX（CURRENT）
+→ Phase 3: locator + performance instrumentation 工程修复
+→ 再决定何时进入第 2 名真人样本
 ```
 
-下一阶段尚未自动选择：
+理由：
 
-- 第 2 名真人样本；
-- 修复 locator / performance instrumentation 等非阻断问题；
-- 启动只读 HTML + PDF Presentation / UX 项目；
-- 或其他明确授权任务。
+> 当前17页真人报告仍接近审计视图，用户无法高效审查阅读。继续生成第2名只会扩大不可读输出，因此先解决呈现，再补工程观测和定位精度，最后决定何时恢复真人样本扩展。
+
+Phase 2 当前只做设计与验收标准，不直接改代码。Phase 2 Gate 后再决定是否授权实现；Phase 3 在 Presentation UX 状态明确后执行。第2名真人样本在 Phase 2 + Phase 3 情况未明确前保持暂停。
 
 ## Evidence 基础
 
