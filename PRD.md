@@ -31,46 +31,85 @@ Arbitrator Due Diligence
 关键事实、观点和关系线索必须先形成 Evidence Object，再进入报告链：
 
 ```text
-Research → Evidence Objects → evidence.json → Validator → Canonical Report Model → Markdown / HTML / PDF
+Research → Evidence Objects → evidence.json → Validator → Canonical Report Model → Presentation → HTML / PDF
 ```
 
-Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `references/snapshot-policy.md` 为准。三种报告格式应保持事实、Evidence ID、限制和来源一致；Renderer 不得联网补事实、改变来源等级或把不确定改成确定。PDF 是正式交付格式，需支持中文、分页、来源索引和 Evidence 可追溯性。
+Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `references/snapshot-policy.md` 为准。最终用户输出必须保持事实、Evidence 对应、限制和来源一致；Renderer / Presentation 不得联网补事实、改变来源等级或把不确定改成确定。
+
+## Final delivery direction
+
+当前确认的产品方向是双交付：
+
+### Interactive HTML
+
+作为未来主要工作版 / 交互版，面向案件团队日常阅读和核验。
+
+应支持：
+
+- 快速查看关键事实；
+- 展开/收起 Evidence；
+- 查看来源；
+- 聚焦未确认事项；
+- 模块导航；
+- 用户下一步决策提示。
+
+交互默认只改变展示状态。未来如加入律师人工复核、备注或接受风险等状态，应使用独立 review / annotation data，不直接改写历史 Evidence。
+
+### PDF
+
+作为固定版 / 交付版，面向客户发送、邮件附件、卷宗和归档。
+
+必须：
+
+- 与 HTML 使用同一事实源；
+- 固定检索截止时间和报告版本；
+- 保留 material limitations / unknown；
+- 保留来源可追溯性；
+- 不默认展示绝大多数机器审计字段。
+
+### Markdown
+
+继续作为内部/兼容输出，用于 diff、调试、审查和 portable text；当前不定位为主要终端用户交付物。
 
 ## Report UX and information hierarchy
 
-最终报告必须遵循：
+最终用户体验采用三层信息模型。
 
-> **系统完整记录，用户按需看见。**
+### 用户默认看到
 
-系统内部必须保留审计、复现和排障所需的数据，但最终用户报告不应被运行日志、路径、hash、token、测试状态和工程细节淹没。
+- 这个仲裁员是谁；
+- 核实到哪些关键事实；
+- 与选择/使用他有什么实际相关性；
+- 哪些重要事项尚未确认；
+- 是否需要用户进一步决定。
 
-默认用户可见层应优先展示：
+### 需要时展开
 
-- 任务范围与启用/未启用功能；
-- 身份核对；
-- 专业背景与任职；
-- 公开著作/专业材料；
-- 一般公开专业关系事实；
-- 对判断有实质影响的 unknown / coverage gap / source conflict；
-- 人工复核事项；
-- 来源索引与必要证据定位。
+- 来源；
+- 关键引用；
+- 必要限制；
+- Evidence 对应关系；
+- human review / uncertainty 等与判断有关的信息。
 
-默认系统内部层包括：
+### 系统保存、不默认展示
 
-- run contract / staging provenance；
-- 本地路径、hash、Git revision；
-- command / exit code / traceback；
-- token / cost / performance benchmark；
-- dependency / renderer / runtime 技术信息；
-- 内部 Gate / regression / Reviewer 记录。
+- SHA-256；
+- local path；
+- retrieval timestamp；
+- snapshot path/level；
+- parser/extraction metadata；
+- execution receipts；
+- token / cost / benchmark；
+- internal safety / governance evidence；
+- 重复 machine validation 字段。
 
-如果内部技术事实实质影响报告可靠性，必须把**影响**翻译成用户可理解的限制后展示，而不是直接显示机器错误。
+如果系统内部事实实质影响报告可靠性，必须把其**影响**翻译成用户可理解的限制并提升到用户可见层，而不是显示原始机器错误。
+
+详细规则以 `references/report-experience-and-information-architecture.md` 为准。
 
 UX/UI 不能通过删除 Evidence、unknown、coverage gap、人工复核状态或未执行模块来让报告显得更简洁。
 
-详细可见性规则以 `references/report-experience-and-information-architecture.md` 为准。
-
-未来正式启动 PDF/HTML UX/UI 项目时，应基于真实报告样本创建 `REPORT_DESIGN.md`，记录视觉层级、组件、版式、状态语义和验收。UX/UI 变更应记录 Before / After / Why / Source-Evidence / Affected Scope。当前阶段不提前创建视觉设计文件。
+未来正式启动 HTML/PDF UX/UI 项目时，应基于真实报告样本创建 `REPORT_DESIGN.md`，记录视觉层级、组件、交互、PDF 版式、状态语义和验收。UX/UI 变更应记录 Before / After / Why / Source-Evidence / Affected Scope。
 
 ## User-side dependency principle
 
@@ -78,14 +117,16 @@ UX/UI 不能通过删除 Evidence、unknown、coverage gap、人工复核状态�
 
 ## User waiting experience and timing
 
-技术上能完成不等于产品可接受。Capability、第三方来源和架构选型必须同时考虑用户等待时间；后续每项关键 Capability 都应保留可复现的实测耗时，并关注冷启动、单来源处理、网络等待/重试以及串并行结构对总耗时的影响。单名仲裁员完整尽调若需要约 30 分钟，属于明显不理想的体验，不应作为正常目标状态接受。在第一条真实完整链路取得数据前，不预设精确 SLA；先测量，再由主控固定性能预算。
+技术上能完成不等于产品可接受。Capability、第三方来源和架构选型必须同时考虑用户等待时间；后续每项关键 Capability 都应保留可复现的实测耗时，并关注冷启动、单来源处理、网络等待/重试以及串并行结构对总耗时的影响。
 
-真人 research run 还应按 `references/research-performance-benchmark.md` 记录 token、时间、能力配置、来源/Evidence 产出和可得的实际成本，用于长期比较不同能力与方法；性能优化不得牺牲证据质量。
+真人 research run 应按 `references/research-performance-benchmark.md` 记录 token、时间、能力配置、来源/Evidence 产出和可得的实际成本，用于长期比较不同能力与方法；性能优化不得牺牲证据质量。
 
 ## Current scope and success standard
 
 V0.2 Evidence Foundation、静态来源、数字原生 PDF、Canonical Report Model → Markdown / HTML / PDF、Bundled Capability Baseline，以及 authorized real research run plumbing 均已通过相应主控 Gate / 独立审查。CIETAC 5 人样本已经锁定。
 
-当前正在恢复执行第一名 `WONG, King/黄劲` 的真实完整基础尽调链路。当前成功标准不是“技术入口可运行”，而是以真实公开来源完成身份消歧、Evidence-first 研究、Validator、Canonical Model、Markdown / HTML / PDF、readback，并如实保留 coverage gap、人工复核和性能数据。
+第一名 `WONG, King/黄劲` 的真实完整基础尽调链路已执行，执行端状态为 `REAL_CHAIN_PARTIAL`，当前进入独立审查 Gate。
 
-报告 UX/UI 项目尚未启动；应等待至少一份真实完整报告样本后单独授权。
+第一份真人报告已经证明当前“完整 Evidence 字段式输出”不适合作为最终用户体验：9 条 final Evidence 形成 17 页 PDF，并展示大量 machine fields。因此未来 UX/UI 项目的核心不是单纯美化，而是建立稳定的 Presentation Layer 和三层信息结构。
+
+报告 UX/UI 实现尚未启动；当前仅记录产品方向，不授权 Renderer/UI 改造。
