@@ -81,25 +81,39 @@ Issue #17 已恢复，当前只对：
 
 ## Future report UX/UI
 
-未来可能单独启动 PDF / HTML 尽调报告 UX/UI 项目，但**当前尚未授权设计或改版**。
+未来报告产品方向已进一步收敛，但**当前尚未授权 UI 实现或 Renderer 改版**。
 
-已固定的设计治理规则：
+### 信息架构
 
-- 遵循 Vibe Loop 的 MACHINE PRECISION, HUMAN CLARITY；
-- 系统内部完整留存 Evidence、Snapshot、运行审计、hash、token、timing 等；
-- 最终用户报告只展示用户做判断需要的信息；
-- internal-only 信息如果实质影响报告可靠性，必须转译成用户可理解的限制；
-- UX/UI 不得通过删除 unknown、coverage gap、人工复核或来源限制来制造“更干净”的报告。
+采用三层：
+
+1. **用户默认看到**：仲裁员是谁、已核实关键事实、实际相关性、重要未确认事项、是否需要用户进一步决定。
+2. **需要时展开**：来源、关键引用、必要限制、Evidence 对应关系。
+3. **系统保存、不默认展示**：SHA-256、local path、retrieval timestamp、snapshot/path/level、parser/extraction metadata、execution receipts、token/cost/performance、内部安全治理与重复 machine validation 字段。
+
+系统内部事实如果实质影响报告可靠性，必须转译成用户可理解的限制后再显示。
+
+### 最终交付方向
+
+优先考虑：
+
+- **Interactive HTML**：工作版 / 交互版，作为主要阅读与核验界面；
+- **PDF**：固定版 / 正式交付版，适合客户发送、归档和离线阅读；
+- Markdown 保留为内部/兼容输出，不作为主要终端用户产品。
+
+HTML 与 PDF 必须来自同一 Canonical Report Model；允许信息密度、导航和展开方式不同，不允许事实、来源等级、不确定性或限制不一致。
+
+当前第一名真人样本（9 final Evidence / 17-page PDF）已证明完整 Evidence 字段式平铺阅读负担较高，并直接暴露 local_path、retrieval、snapshot/hash 等 machine fields。这些是未来 Presentation Layer 的真实设计依据。
 
 标准文件职责：
 
-- `PRD.md`：用户侧报告要求与验收；
-- `references/report-experience-and-information-architecture.md`：信息分层与可见性规则；
-- `ARCHITECTURE.md`：Evidence → presentation 边界；
-- 未来正式启动 UX/UI 时再创建 `REPORT_DESIGN.md`；
-- `PROJECT_BRIEF.md` 只记录阶段和 Gate。
+- `PRD.md`：用户侧目标、三层信息结构和 HTML/PDF 双交付要求；
+- `references/report-experience-and-information-architecture.md`：visibility policy；
+- `ARCHITECTURE.md`：Evidence → Canonical → Presentation → HTML/PDF 技术边界；
+- 正式启动 UX/UI 时再创建 `REPORT_DESIGN.md`；
+- `PROJECT_BRIEF.md` 只记录方向、阶段和 Gate。
 
-未来 UX/UI 应等待至少一份真实完整报告样本，再基于实际阅读问题启动。
+当前继续优先完成 Issue #20 对第一名真人链的独立审查，不进入第 2 名或 UX/UI 实现。
 
 ## 产品边界
 
