@@ -1,6 +1,6 @@
 # 商事仲裁员尽调与冲突审查 Skill：项目简报
 
-> 更新日期：2026-09-25
+> 更新日期：2026-09-26
 > 正式名称：Arbitrator Due Diligence
 > 当前阶段：V1 最小能力实现
 > 当前获准子阶段：第一名真实完整链路
@@ -12,19 +12,19 @@
 ## 当前范围
 
 - 首轮机构：贸仲（CIETAC）。
-- V0.2 Evidence Foundation：PASS（已通过独立复审）。
+- V0.2 Evidence Foundation：PASS。
 - Capability Requirements / Source Evaluation：PASS。
 - Static Source → Snapshot → Evidence：PASS。
 - Digital PDF → Snapshot → Evidence：PASS。
-- Canonical Report Model → Markdown / HTML：PASS。
-- Canonical Report Model → PDF：PASS。
-- Bundled Capability Baseline：PASS（Issue #13 主控 Gate；Issue #14 独立审查 PASS）。
-- CIETAC 5 人样本抽样与锁样：PASS（Issue #15 主控 Gate；Issue #16 独立审查 PASS）。
+- Canonical Report Model → Markdown / HTML / PDF：PASS。
+- Bundled Capability Baseline：PASS（Issue #13 / #14）。
+- CIETAC 5 人样本抽样与锁样：PASS（Issue #15 / #16）。
+- Authorized real research run repair：PASS（Issue #18 / #19）。
 - 当前阶段：V1 最小能力实现；当前获准子阶段：**第一名完整真实链路**。
-- 当前主要能力：Evidence Schema、Snapshot Policy、Validator、静态来源/PDF提取、Canonical Report Model、Markdown/HTML/PDF Renderer、Bundled capability smoke、端到端合成链。
+- 当前主要能力：Evidence Schema、Snapshot Policy、Validator、真实/合成 Source capture、authorized real research run、Canonical Report Model、Markdown/HTML/PDF Renderer、Bundled capability smoke。
 - 当前工作区：`D:\Arbitrator Due Diligence`。
 - 真实人物研究报告和证据继续保留在本地 `reports/`，不纳入公开仓库。
-- 当前没有数据库、后台服务、UI、外部 API 或多 Agent 调度平台。
+- 当前没有数据库、后台服务、独立 UI、外部 API 或多 Agent 调度平台。
 
 ## 当前锁定样本
 
@@ -48,15 +48,13 @@
 
 ## 当前下一步
 
-Issue #17 已在真实 run / collector 入口处 **BLOCKED**，Evidence=0；未完成第一名真人尽调。当前仅执行 Issue #18 narrow repair：独立 authorized real research run、受控 staging、调用者 metadata、同一 run 报告消费及有界 >100 页支持。以合成身份完成 real-mode smoke 和既有 synthetic/package regression；真实官方 PDF 只做本地 staging/hash 验收。修复提交后等待主控与独立 Reviewer，**不自动恢复 Issue #17**。
+Issue #17 已在首次真人运行中因 synthetic-only 输入边界 BLOCKED；Issue #18 修复 real research run / staging / real metadata / >100-page PDF，并经 Issue #19 独立审查 PASS。
 
-以下第一名真实研究目标保持待授权恢复：
-
-只对锁样顺序第 1 名：
+Issue #17 已恢复，当前只对：
 
 `WONG, King/黄劲`
 
-执行一次**完整真实基础尽调链路**：
+执行第一次完整真实基础尽调链路：
 
 ```text
 真实公开检索
@@ -68,6 +66,7 @@ Issue #17 已在真实 run / collector 入口处 **BLOCKED**，Evidence=0；未�
 → Canonical Report Model
 → Markdown / HTML / PDF
 → readback / consistency check
+→ performance benchmark
 ```
 
 本轮没有用户指定观点或法律问题，因此：
@@ -76,7 +75,31 @@ Issue #17 已在真实 run / collector 入口处 **BLOCKED**，Evidence=0；未�
 - 案件相关冲突线索核查：**未启用**；
 - 不得把“未执行”写成“没有观点问题”或“无冲突”。
 
+执行端从本次真人 run 开始记录 time / token / cost availability / capability profile / sources / Evidence 等 performance 数据。主控长期追加到 `benchmarks/research-performance.jsonl`。
+
 第一名完整真实链路完成后先停止并 Gate，不自动继续第 2–5 名。
+
+## Future report UX/UI
+
+未来可能单独启动 PDF / HTML 尽调报告 UX/UI 项目，但**当前尚未授权设计或改版**。
+
+已固定的设计治理规则：
+
+- 遵循 Vibe Loop 的 MACHINE PRECISION, HUMAN CLARITY；
+- 系统内部完整留存 Evidence、Snapshot、运行审计、hash、token、timing 等；
+- 最终用户报告只展示用户做判断需要的信息；
+- internal-only 信息如果实质影响报告可靠性，必须转译成用户可理解的限制；
+- UX/UI 不得通过删除 unknown、coverage gap、人工复核或来源限制来制造“更干净”的报告。
+
+标准文件职责：
+
+- `PRD.md`：用户侧报告要求与验收；
+- `references/report-experience-and-information-architecture.md`：信息分层与可见性规则；
+- `ARCHITECTURE.md`：Evidence → presentation 边界；
+- 未来正式启动 UX/UI 时再创建 `REPORT_DESIGN.md`；
+- `PROJECT_BRIEF.md` 只记录阶段和 Gate。
+
+未来 UX/UI 应等待至少一份真实完整报告样本，再基于实际阅读问题启动。
 
 ## 产品边界
 
@@ -100,11 +123,10 @@ Issue #17 已在真实 run / collector 入口处 **BLOCKED**，Evidence=0；未�
 V1 最小能力实现
 → Bundled Capability Baseline：PASS
 → CIETAC 5 人确定性抽样与锁样：PASS
-→ 第一名完整真实链路（Issue #17）：BLOCKED
-→ narrow real-run repair（Issue #18）：CURRENT
-→ 主控与独立 Reviewer Gate 后决定是否恢复 #17
+→ real research run repair：PASS
+→ 第一名完整真实链路（Issue #17）：CURRENT
 → 主控验收 / 独立审查
-→ 再决定是否继续第 2–5 名或修复暴露问题
+→ 再决定第 2–5 名、产品修复或后续 UX/UI
 ```
 
 不在第一名真实链路之前继续增加 PDF/Pillow、OCR、跨平台、UI、数据库或其他非阻塞技术准备。
