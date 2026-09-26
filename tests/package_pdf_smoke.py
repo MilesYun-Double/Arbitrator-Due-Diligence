@@ -47,7 +47,7 @@ def check_distribution(raw):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',required=True)
     root=scoped_path(parser.parse_args().output,ROOT);root.mkdir(parents=True,exist_ok=False)
-    names=['LICENSE','scripts/report.py','scripts/static_source.py','scripts/validate_evidence.py',
+    names=['LICENSE','scripts/research_run.py','scripts/report.py','scripts/static_source.py','scripts/validate_evidence.py',
            'scripts/pdf_source.py','scripts/pdf_bundle.py','scripts/pdf_report.py',
            'references/pdf-renderer.md','tests/fixtures/pdf_reports/model.json',
            'vendor/pypdf-6.19.0-py3-none-any.whl','vendor/pypdf-LICENSE.txt','vendor/README.md']

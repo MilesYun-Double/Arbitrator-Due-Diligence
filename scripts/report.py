@@ -11,6 +11,7 @@ from time import perf_counter
 from urllib.parse import urlsplit, quote
 
 from static_source import PROJECT, scoped_path, task_run_root
+from research_run import resolve_run, run_path
 from validate_evidence import validate_evidence
 
 INPUT_ROOT = PROJECT / 'tests' / 'fixtures' / 'report_sources'
@@ -29,7 +30,7 @@ def json_text(value):
 
 
 def validate_inputs(items, base_dir, *, run_root=None):
-    allowed = task_run_root(run_root) if run_root is not None else INPUT_ROOT
+    allowed = resolve_run(run_root) if run_root is not None else INPUT_ROOT
     if not isinstance(items, list) or not items:
         raise ValueError('nonempty Evidence array required')
     ids = set()
@@ -40,7 +41,7 @@ def validate_inputs(items, base_dir, *, run_root=None):
             if path:
                 if not isinstance(path, str) or not Path(path).is_absolute():
                     raise ValueError('snapshot path must be absolute within authorized synthetic root')
-                scoped_path(path, allowed)
+                run_path(path, allowed)
         try:
             errors = validate_evidence(item, existing_ids=ids, base_dir=base_dir)
         except (TypeError, ValueError, OSError) as exc:
@@ -167,10 +168,10 @@ def render_html(model):
 
 def generate(evidence_path, task_path, output, *, run_root=None):
     start = perf_counter()
-    allowed = task_run_root(run_root) if run_root is not None else None
-    evidence_path = scoped_path(evidence_path, allowed or INPUT_ROOT)
-    task_path = scoped_path(task_path, allowed or INPUT_ROOT)
-    output = scoped_path(output, allowed or PROJECT)
+    allowed = resolve_run(run_root) if run_root is not None else None
+    evidence_path = run_path(evidence_path, allowed or INPUT_ROOT)
+    task_path = run_path(task_path, allowed or INPUT_ROOT)
+    output = run_path(output, allowed or PROJECT)
     if output.exists(): raise FileExistsError('output must be a new directory')
     items = json.loads(evidence_path.read_text(encoding='utf-8-sig'))
     task = json.loads(task_path.read_text(encoding='utf-8-sig'))

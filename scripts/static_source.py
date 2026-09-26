@@ -28,14 +28,22 @@ DENIED = {'reports', '.git', '.preview', 'credentials', 'secrets', 'memory'}
 
 
 def scoped_path(value, root):
+    return _checked_path(value, root)
+
+
+def _checked_path(value, root, *, reports_root=None):
     """Reject traversal and links before reading, including Windows junctions/ADS."""
+    if ".." in Path(value).parts:
+        raise ValueError("path traversal refused")
     path = Path(os.path.abspath(value))
     try:
         relative = path.relative_to(root)
     except ValueError as exc:
         raise ValueError(f'path outside allowed root: {root}') from exc
-    for part in path.relative_to(PROJECT).parts:
-        if part.lower() in DENIED or ':' in part or part.endswith((' ', '.')):
+    for index, part in enumerate(path.relative_to(PROJECT).parts):
+        authorized_reports = (reports_root is not None and index == 0 and part == "reports"
+                              and path.is_relative_to(reports_root))
+        if (part.lower() in DENIED and not authorized_reports) or ':' in part or part.endswith((' ', '.')):
             raise ValueError('forbidden path component')
         # Task-owned .tmp-* output directories are the sole hidden exception.
         if part.startswith('.') and not part.startswith('.tmp-'):
@@ -186,24 +194,30 @@ def readable(raw, content_type):
     return text
 
 
-def collect(source, output, *, evidence_id, title, publisher, claim, excerpt=None,
-            evidence_type='unresolved_lead', level='L2', run_root=None):
+def collect(source, output, *, evidence_id, title=None, publisher=None, claim=None, excerpt=None,
+            evidence_type='unresolved_lead', level='L2', run_root=None, metadata_path=None):
+    from research_run import resolve_run, is_real, run_path, staged_input, real_metadata
+    allowed = resolve_run(run_root) if run_root is not None else None
+    real = is_real(allowed)
+    if real and metadata_path is None:
+        raise ValueError('real run requires explicit metadata JSON')
+    if not real and metadata_path is not None:
+        raise ValueError('real metadata requires a real run')
     if evidence_type not in TYPES or level not in ('L0', 'L1', 'L2'):
         raise ValueError('unsupported evidence type or snapshot level')
     if evidence_type == 'source_supported_fact' and (not excerpt or level == 'L0'):
         raise ValueError('source-supported fact requires an excerpt and L1/L2')
-    if not all(isinstance(v, str) and v.strip() for v in (title, publisher, claim)):
+    if not real and not all(isinstance(v, str) and v.strip() for v in (title, publisher, claim)):
         raise ValueError('title, publisher and claim are caller-supplied nonempty metadata')
-    allowed = task_run_root(run_root) if run_root is not None else None
-    output = scoped_path(output, allowed or PROJECT)
+    output = run_path(output, allowed or PROJECT)
     if output.exists():
         raise FileExistsError('output must be a new directory')
     is_url = '://' in source
-    if allowed is not None and is_url:
+    if allowed is not None and not real and is_url:
         raise ValueError('task-owned synthetic run accepts local inputs only')
     local = None
     if not is_url:
-        local = scoped_path(source, allowed or TEST_ROOT)
+        local = staged_input(source, allowed) if real else scoped_path(source, allowed or TEST_ROOT)
         if local.suffix.lower() not in ('.txt', '.html', '.htm'):
             raise ValueError('only explicitly named test text/HTML files are allowed')
     else:
@@ -228,6 +242,12 @@ def collect(source, output, *, evidence_id, title, publisher, claim, excerpt=Non
                uncertainty='unknown', snapshot={'level': level, 'status': 'not_saved', 'path': None,
                                               'sha256': None, 'media_type': None, 'notes': None},
                human_review='not_started')
+    if real:
+        obj = real_metadata(metadata_path, allowed, evidence_id, excerpt, local, source if is_url else None)
+        if level == 'L0' and obj['evidence_type'] in ('source_supported_fact', 'public_viewpoint', 'relationship_fact'):
+            raise ValueError('source-backed Evidence requires L1/L2')
+        obj.update(excerpt=None, excerpt_locator=None)
+        obj['snapshot'] = dict(level=level, status='not_saved', path=None, sha256=None, media_type=None, notes=None)
     # Validate caller metadata using the existing contract before any I/O.
     probe = dict(obj, evidence_type='unresolved_lead')
     errors = validate_evidence(probe)
@@ -250,6 +270,8 @@ def collect(source, output, *, evidence_id, title, publisher, claim, excerpt=Non
         if isinstance(exc, HTTPError):
             metadata.update(final_url=exc.geturl(), http_status=exc.code)
         raw = text = None
+    if failure and real:
+        raise ValueError(f'real source capture failed; caller metadata not reclassified: {failure}')
     if failure:
         obj.update(evidence_type='unknown_insufficient_coverage',
                    claim='本次未能取得可用来源证据，不表示相关事实不存在。',
@@ -294,8 +316,9 @@ def main():
     parser.add_argument('source')
     parser.add_argument('--output', required=True)
     for key in ('evidence-id', 'title', 'publisher', 'claim'):
-        parser.add_argument('--' + key, required=True)
+        parser.add_argument('--' + key, required=key == 'evidence-id')
     parser.add_argument('--run-root')
+    parser.add_argument('--metadata', dest='metadata_path')
     parser.add_argument('--excerpt')
     parser.add_argument('--evidence-type', choices=TYPES, default='unresolved_lead')
     parser.add_argument('--level', choices=('L0', 'L1', 'L2'), default='L2')

@@ -20,10 +20,12 @@ _HOOKS = ('reportlab_mods', 'reportlab_settings', 'reportlab.local_rl_mods', 're
 _OWN_HOOKS = {}
 
 
-def load_dependencies(runtime):
+def load_dependencies(runtime, *, run_root=None):
+    from research_run import resolve_run, run_path
+    allowed = resolve_run(run_root) if run_root is not None else PROJECT
     if sys.implementation.name != 'cpython' or sys.version_info[:2] != (3, 12) or sys.platform != 'win32' or platform.machine().lower() not in ('amd64', 'x86_64'):
         raise ValueError('bundled Pillow candidate requires Windows x64 / CPython 3.12; no automatic installation')
-    runtime = scoped_path(runtime, PROJECT)
+    runtime = run_path(runtime, allowed)
     if not runtime.name.startswith('.tmp-'):
         raise ValueError('runtime must be an explicit task-owned .tmp-* directory')
     for name in ('reportlab', 'PIL', 'charset_normalizer'):
@@ -44,7 +46,7 @@ def load_dependencies(runtime):
         with zipfile.ZipFile(BUNDLE / name) as archive:
             for info in archive.infolist():
                 if info.is_dir(): continue
-                target = scoped_path(runtime / info.filename, runtime)
+                target = run_path(runtime / info.filename, allowed)
                 expected.add(target)
                 data = archive.read(info)
                 expanded += len(data)
@@ -56,7 +58,7 @@ def load_dependencies(runtime):
     actual = set()
     for current, directories, files in os.walk(runtime, followlinks=False):
         for name in directories + files:
-            node = scoped_path(Path(current) / name, runtime)
+            node = run_path(Path(current) / name, allowed)
             if name in files: actual.add(node)
     if actual != expected:
         raise ValueError('unexpected runtime files; no overwrite/cleanup attempted')

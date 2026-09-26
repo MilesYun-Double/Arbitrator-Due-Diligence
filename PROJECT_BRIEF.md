@@ -48,6 +48,10 @@
 
 ## 当前下一步
 
+Issue #17 已在真实 run / collector 入口处 **BLOCKED**，Evidence=0；未完成第一名真人尽调。当前仅执行 Issue #18 narrow repair：独立 authorized real research run、受控 staging、调用者 metadata、同一 run 报告消费及有界 >100 页支持。以合成身份完成 real-mode smoke 和既有 synthetic/package regression；真实官方 PDF 只做本地 staging/hash 验收。修复提交后等待主控与独立 Reviewer，**不自动恢复 Issue #17**。
+
+以下第一名真实研究目标保持待授权恢复：
+
 只对锁样顺序第 1 名：
 
 `WONG, King/黄劲`
@@ -96,7 +100,9 @@
 V1 最小能力实现
 → Bundled Capability Baseline：PASS
 → CIETAC 5 人确定性抽样与锁样：PASS
-→ 第一名完整真实链路：CURRENT
+→ 第一名完整真实链路（Issue #17）：BLOCKED
+→ narrow real-run repair（Issue #18）：CURRENT
+→ 主控与独立 Reviewer Gate 后决定是否恢复 #17
 → 主控验收 / 独立审查
 → 再决定是否继续第 2–5 名或修复暴露问题
 ```

@@ -64,7 +64,7 @@ def run(root, without_pillow=False):
         if without_pillow:
             # Experiment only: isolate the bounded non-Pillow archives. This does
             # not change the production loader or patch upstream ReportLab code.
-            def experimental_loader(runtime):
+            def experimental_loader(runtime, *, run_root=None):
                 runtime=scoped_path(runtime,root);runtime.mkdir(exist_ok=False)
                 for name,digest in pdf_bundle.WHEELS.items():
                     if name.startswith('pillow-'): continue

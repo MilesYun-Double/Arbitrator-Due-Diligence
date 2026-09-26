@@ -16,7 +16,7 @@ from package_pdf_smoke import check_distribution
 
 def package(output):
     output=scoped_path(output,ROOT);output.mkdir(parents=True,exist_ok=False)
-    names=['LICENSE','scripts/static_source.py','scripts/pdf_source.py','scripts/validate_evidence.py',
+    names=['LICENSE','scripts/research_run.py','scripts/static_source.py','scripts/pdf_source.py','scripts/validate_evidence.py',
            'scripts/report.py','scripts/pdf_report.py','scripts/pdf_bundle.py',
            'schemas/evidence.schema.json','references/snapshot-policy.md','references/bundled-baseline.md',
            'tests/synthetic_chain.py','tests/fixtures/static_sources/page.html',

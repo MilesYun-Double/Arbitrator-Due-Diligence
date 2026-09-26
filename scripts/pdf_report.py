@@ -10,7 +10,8 @@ import re
 import sys
 from time import perf_counter
 
-from report import blocks, build_model, render_markdown, render_html, json_text
+from report import validate_inputs, blocks, build_model, render_markdown, render_html, json_text
+from research_run import resolve_run, run_path, is_real
 from validate_evidence import validate_evidence
 from static_source import PROJECT, scoped_path, task_run_root
 from pdf_bundle import load_dependencies, WHEELS, BUNDLE
@@ -123,13 +124,15 @@ def readback(raw,model):
 
 def generate_pdf(model_path,output,runtime,run_root=None):
     started=perf_counter()
-    allowed=task_run_root(run_root) if run_root is not None else None
-    model_path=scoped_path(model_path,allowed or MODEL_ROOT);output=scoped_path(output,allowed or PROJECT)
-    if allowed is not None: runtime=scoped_path(runtime,allowed)
+    allowed=resolve_run(run_root) if run_root is not None else None
+    model_path=run_path(model_path,allowed or MODEL_ROOT);output=run_path(output,allowed or PROJECT)
+    if allowed is not None: runtime=run_path(runtime,allowed)
     if output.exists():raise FileExistsError('output must be a new directory')
     model=json.loads(model_path.read_text(encoding='utf-8-sig'))
+    if is_real(allowed):
+        validate_inputs(model.get('evidence') if isinstance(model, dict) else None, model_path.parent, run_root=allowed)
     check_model(model)
-    stage=perf_counter();bundle=load_dependencies(runtime);dependency_ms=(perf_counter()-stage)*1000
+    stage=perf_counter();bundle=load_dependencies(runtime, run_root=allowed) if allowed is not None else load_dependencies(runtime);dependency_ms=(perf_counter()-stage)*1000
     formats_start=perf_counter()
     md=render_markdown(model);ht=render_html(model)
     stage=perf_counter();raw,font=render_pdf(model,runtime);render_ms=(perf_counter()-stage)*1000
