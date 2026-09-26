@@ -26,6 +26,15 @@ Arbitrator Due Diligence
 
 本阶段不分析完整案卷、不提炼全案争议焦点、不制定代理策略，不预测仲裁员偏向、胜诉率或“更容易支持某一方”，不自动决定人选、认定回避或提出回避申请。不采集私人通信、私人社交关系、泄露数据或非公开仲裁材料。
 
+当前报告产品也**不做**：
+
+- 用户标记“已复核”；
+- 一键发起补查；
+- 备注 / 批注；
+- 接受风险；
+- 审批流；
+- 写回 Evidence 或研究状态。
+
 ## Evidence and reporting requirements
 
 关键事实、观点和关系线索必须先形成 Evidence Object，再进入报告链：
@@ -38,26 +47,24 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 
 ## Final delivery direction
 
-当前确认的产品方向是双交付：
+### Interactive HTML — 只读工作版
 
-### Interactive HTML
-
-作为未来主要工作版 / 交互版，面向案件团队日常阅读和核验。
+未来主要阅读界面。
 
 应支持：
 
 - 快速查看关键事实；
-- 展开/收起 Evidence；
+- 展开 / 收起 Evidence；
 - 查看来源；
 - 聚焦未确认事项；
 - 模块导航；
-- 用户下一步决策提示。
+- 页面内跳转。
 
-交互默认只改变展示状态。未来如加入律师人工复核、备注或接受风险等状态，应使用独立 review / annotation data，不直接改写历史 Evidence。
+交互只改变展示状态，不修改底层 Evidence，也不建立复核、补查、备注等写入型工作流。
 
-### PDF
+### PDF — 固定交付版
 
-作为固定版 / 交付版，面向客户发送、邮件附件、卷宗和归档。
+面向客户发送、邮件附件、卷宗和归档。
 
 必须：
 
@@ -69,19 +76,18 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 
 ### Markdown
 
-继续作为内部/兼容输出，用于 diff、调试、审查和 portable text；当前不定位为主要终端用户交付物。
+保留为内部/兼容输出，用于 diff、调试、审查和 portable text；不定位为主要终端用户交付物。
 
 ## Report UX and information hierarchy
 
-最终用户体验采用三层信息模型。
+采用三层：
 
 ### 用户默认看到
 
 - 这个仲裁员是谁；
 - 核实到哪些关键事实；
 - 与选择/使用他有什么实际相关性；
-- 哪些重要事项尚未确认；
-- 是否需要用户进一步决定。
+- 哪些重要事项尚未确认。
 
 ### 需要时展开
 
@@ -89,7 +95,7 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 - 关键引用；
 - 必要限制；
 - Evidence 对应关系；
-- human review / uncertainty 等与判断有关的信息。
+- 与判断有关的 uncertainty / human_review 状态。
 
 ### 系统保存、不默认展示
 
@@ -103,30 +109,22 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 - internal safety / governance evidence；
 - 重复 machine validation 字段。
 
-如果系统内部事实实质影响报告可靠性，必须把其**影响**翻译成用户可理解的限制并提升到用户可见层，而不是显示原始机器错误。
+如果内部事实实质影响报告可靠性，必须把其**影响**翻译成用户可理解的限制并提升到用户可见层。
 
 详细规则以 `references/report-experience-and-information-architecture.md` 为准。
 
-UX/UI 不能通过删除 Evidence、unknown、coverage gap、人工复核状态或未执行模块来让报告显得更简洁。
-
-未来正式启动 HTML/PDF UX/UI 项目时，应基于真实报告样本创建 `REPORT_DESIGN.md`，记录视觉层级、组件、交互、PDF 版式、状态语义和验收。UX/UI 变更应记录 Before / After / Why / Source-Evidence / Affected Scope。
-
 ## User-side dependency principle
 
-基础产品应遵循 Bundled First、Host Enhanced：用户不应被强制购买服务、申请付费 API 或另行安装第三方项目。Skill ZIP 可携带合法可再分发的脚本、Schema、模板和静态资源；宿主已有联网能力可用于搜索。实际打包第三方组件时必须单独核验许可证、NOTICE 和再分发义务。
+基础产品遵循 Bundled First、Host Enhanced：用户不应被强制购买服务、申请付费 API 或另行安装第三方项目。
 
 ## User waiting experience and timing
 
-技术上能完成不等于产品可接受。Capability、第三方来源和架构选型必须同时考虑用户等待时间；后续每项关键 Capability 都应保留可复现的实测耗时，并关注冷启动、单来源处理、网络等待/重试以及串并行结构对总耗时的影响。
-
-真人 research run 应按 `references/research-performance-benchmark.md` 记录 token、时间、能力配置、来源/Evidence 产出和可得的实际成本，用于长期比较不同能力与方法；性能优化不得牺牲证据质量。
+Capability、第三方来源和架构选型必须考虑用户等待时间。真人 research run 按 `references/research-performance-benchmark.md` 记录 token、时间、能力配置、来源/Evidence 产出和可得的实际成本；性能优化不得牺牲证据质量。
 
 ## Current scope and success standard
 
-V0.2 Evidence Foundation、静态来源、数字原生 PDF、Canonical Report Model → Markdown / HTML / PDF、Bundled Capability Baseline，以及 authorized real research run plumbing 均已通过相应主控 Gate / 独立审查。CIETAC 5 人样本已经锁定。
+第一名 `WONG, King/黄劲` 的真实完整基础尽调链路已执行，执行状态为 `REAL_CHAIN_PARTIAL`，Issue #20 独立审查 Verdict = PASS；该 PASS 验收的是 PARTIAL 的真实性、可追溯性与分类合理性，不升级为 REAL_CHAIN_PASS。
 
-第一名 `WONG, King/黄劲` 的真实完整基础尽调链路已执行，执行端状态为 `REAL_CHAIN_PARTIAL`，当前进入独立审查 Gate。
+第一份真人报告已证明当前“完整 Evidence 字段式输出”不适合作为最终用户体验：9 条 final Evidence 形成 17 页 PDF，并展示大量 machine fields。未来 UX/UI 核心是建立稳定 Presentation Layer 和三层信息结构。
 
-第一份真人报告已经证明当前“完整 Evidence 字段式输出”不适合作为最终用户体验：9 条 final Evidence 形成 17 页 PDF，并展示大量 machine fields。因此未来 UX/UI 项目的核心不是单纯美化，而是建立稳定的 Presentation Layer 和三层信息结构。
-
-报告 UX/UI 实现尚未启动；当前仅记录产品方向，不授权 Renderer/UI 改造。
+报告 UX/UI 实现尚未启动；当前仅记录产品方向。
