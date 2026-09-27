@@ -120,7 +120,7 @@ Presentation Layer 可以：
 
 ## Fixed PDF
 
-未来作为正式固定交付版，与 HTML 共享 Canonical facts，固定 version / cutoff date，保留 material unknowns 和 traceable source index，不默认打印 Layer 3 machine fields。
+未来作为正式固定交付版，与 HTML 共享 Canonical facts，固定 cutoff date / time，保留 material unknowns 和 traceable source index，不默认打印 Layer 3 machine fields。
 
 PDF 可以有不同布局，但不能使用不同事实。
 
