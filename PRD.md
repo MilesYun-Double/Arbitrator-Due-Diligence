@@ -69,7 +69,7 @@ Evidence 字段和 Snapshot 规则以 `schemas/evidence.schema.json` 与 `refere
 必须：
 
 - 与 HTML 使用同一事实源；
-- 固定检索截止时间和报告版本；
+- 固定检索截止时间；
 - 保留 material limitations / unknown；
 - 保留来源可追溯性；
 - 不默认展示绝大多数机器审计字段。
