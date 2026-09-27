@@ -156,7 +156,7 @@ Layer 3 的内部事实如果实质影响用户对报告可靠性的理解，必
 PDF 应：
 
 - 与 HTML 使用同一 Canonical Report Model；
-- 固定检索截止时间和报告版本；
+- 固定检索截止时间；
 - 保留主要限制和未确认事项；
 - 保留可追溯来源索引；
 - 不展示绝大多数 Layer 3 机器字段。
@@ -187,7 +187,7 @@ PDF 不是 HTML 的“全部展开后打印”，可以使用不同布局，但�
 - unknowns；
 - human-review state；
 - source index；
-- report version / cutoff date。
+- cutoff date / time。
 
 允许不同：
 
